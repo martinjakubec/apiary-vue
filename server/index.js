@@ -7,7 +7,12 @@ const path = require('path');
 
 const db = mongoose.connect(
   process.env.DB_CONNECTION_URL,
-  {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true},
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+    useFindAndModify: false,
+  },
   (err) => {
     console.log('db connected');
   }
@@ -19,19 +24,21 @@ app.use(helmet());
 app.use(cors());
 
 app.use(express.static(path.join(__dirname, '..', 'public')));
-app.use(express.urlencoded({extended: true}))
-app.use(express.json())
+app.use(express.urlencoded({extended: true}));
+app.use(express.json());
 
+// routers
+const HiveRouter = require('./routers/HiveRouter');
+const UserRouter = require('./routers/UserRouter');
+const ControlRouter = require('./routers/ControlRouter');
 
-// // routers
-const hiveRouter = require('./routers/HiveRouter');
-const userRouter = require('./routers/UserRouter');
-
-app.use(hiveRouter);
-app.use(userRouter);
+app.use(HiveRouter);
+app.use(UserRouter);
+app.use(ControlRouter);
 
 app.get('/router', (req, res, next) => {
   res.send('coucou');
 });
 
-app.listen(3000);
+app.listen(process.env.PORT);
+console.log('listening at port ', process.env.PORT);
