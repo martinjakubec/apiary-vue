@@ -6,12 +6,14 @@ const verifyUser = (req, res, next) => {
     if (req.headers.authorization) {
       if (jwt.verify(req.headers.authorization, JWT_SECRET)) {
         res.locals.isUserLoggedIn = true;
+        res.locals.username = jwt.decode(req.headers.authorization).username;
       } else {
         res.locals.isUserLoggedIn = false;
       }
     } else if (req.body.token) {
       if (jwt.verify(req.body.token, JWT_SECRET)) {
         res.locals.isUserLoggedIn = true;
+        res.locals.username = jwt.decode(req.body.token).username;
       } else {
         res.locals.isUserLoggedIn = false;
       }
