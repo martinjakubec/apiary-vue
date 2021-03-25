@@ -14,18 +14,28 @@ const db = mongoose.connect(
     useFindAndModify: false,
   },
   (err) => {
-    console.log('db connected');
+    if(err) {
+      console.log(err);
+    } else {
+      console.log('db connected');
+    }
   }
 );
 
 const app = express();
 
-app.use(helmet());
+const helmetDirectives = require('./config/helmetConfig')
+
+app.use(helmet(helmetDirectives));
 app.use(cors());
 
-app.use(express.static(path.join(__dirname, '..', 'public')));
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
+
+const verifyUser = require('./middleware/verifyUser');
+app.use(verifyUser);
+
+app.use(express.static(path.join(__dirname, '..', 'public')));
 
 // routers
 const HiveRouter = require('./routers/HiveRouter');
@@ -36,9 +46,8 @@ app.use(HiveRouter);
 app.use(UserRouter);
 app.use(ControlRouter);
 
-app.get('/router', (req, res, next) => {
-  res.send('coucou');
+app.get('/bzzz', (req, res, next) => {
+  return res.send({status: 'bzzz', data: 'bzzz'});
 });
 
 app.listen(process.env.PORT);
-console.log('listening at port ', process.env.PORT);
