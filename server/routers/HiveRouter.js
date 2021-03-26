@@ -38,11 +38,10 @@ router.post('/addhive', async (req, res, next) => {
   const isUserLoggedIn = res.locals.isUserLoggedIn;
   if (isUserLoggedIn) {
     let hiveNumbersAlreadyRegistered = await UserModel.find(
-      {_id: req.body.userId},
+      {username: req.body.username},
       {'hives.hiveNumber': 1}
     );
     hiveNumbersAlreadyRegistered = hiveNumbersAlreadyRegistered[0].hives;
-    console.log(hiveNumbersAlreadyRegistered);
     if (
       hiveNumbersAlreadyRegistered.some(
         (el) => el.hiveNumber === req.body.hiveNumber
@@ -55,7 +54,7 @@ router.post('/addhive', async (req, res, next) => {
       });
     } else {
       const hiveToAdd = await UserModel.findOneAndUpdate(
-        {_id: req.body.userId},
+        {username: req.body.username},
         {$push: {hives: req.body}}
       );
       return res.send({status: 'ok', data: 'Hive has been added successfully'});
@@ -73,9 +72,9 @@ router.post('/deletehive', async (req, res, next) => {
   if (isUserLoggedIn) {
     try {
       const hiveToDelete = await UserModel.updateOne(
-        {_id: req.body.userId},
+        {username: req.body.username},
         {
-          $pull: {hives: {_id: req.body.hiveNumber}},
+          $pull: {hives: {hiveNumber: req.body.hiveNumber}},
         }
       );
       if (hiveToDelete.nModified === 0) {
@@ -97,27 +96,50 @@ router.post('/deletehive', async (req, res, next) => {
   }
 });
 
-router.post('/edithive', async (req, res, next) => {
+router.post('/hive/:id/edit', async (req, res, next) => {
   const isUserLoggedIn = res.locals.isUserLoggedIn;
+  const hiveNumber = req.params.id;
   if (isUserLoggedIn) {
     try {
-      const userId = req.body.userId;
+      const username = req.body.username;
       const editOptions = req.body;
-      const hiveNumber = req.body.hiveNumber;
+      let canHiveNumberBeChanged = true;
+      if (editOptions.hiveNumber) {
+        let hiveNumbersAlreadyRegistered = await UserModel.find(
+          {username: username},
+          {'hives.hiveNumber': 1}
+        );
+        hiveNumbersAlreadyRegistered = hiveNumbersAlreadyRegistered[0].hives;
+        if (
+          hiveNumbersAlreadyRegistered.some(
+            (el) => el.hiveNumber === req.body.hiveNumber
+          )
+        ) {
+          delete editOptions.hiveNumber;
+          canHiveNumberBeChanged = false;
+        }
+      }
 
       const placeholder = {};
       for (let [key, value] of Object.entries(editOptions)) {
-        if (key === 'userId') {
+        if (key === 'username') {
           continue;
         }
         placeholder['hives.$.' + key] = value;
       }
       const hiveToEdit = await UserModel.findOneAndUpdate(
-        {_id: userId, 'hives.hiveNumber': hiveNumber},
+        {username: username, 'hives.hiveNumber': hiveNumber},
         {$set: placeholder}
       );
       if (hiveToEdit) {
-        return res.send({status: 'ok', data: 'Hive updated successfully.'});
+        return res.send({
+          status: 'ok',
+          data:
+            'Hive updated successfully' +
+            (canHiveNumberBeChanged
+              ? '.'
+              : ' except Hive number field. Hive number must be unique.'),
+        });
       } else {
         return res.send({
           status: 'error',

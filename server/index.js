@@ -14,7 +14,7 @@ const db = mongoose.connect(
     useFindAndModify: false,
   },
   (err) => {
-    if(err) {
+    if (err) {
       console.log(err);
     } else {
       console.log('db connected');
@@ -24,7 +24,7 @@ const db = mongoose.connect(
 
 const app = express();
 
-const helmetDirectives = require('./config/helmetConfig')
+const helmetDirectives = require('./config/helmetConfig');
 
 app.use(helmet(helmetDirectives));
 app.use(cors());
