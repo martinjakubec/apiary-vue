@@ -18,7 +18,7 @@ const UserSchema = new mongoose.Schema(
         honeySuper: {type: Number},
         controls: [
           {
-            customId: {type: String},
+            controlCustomId: {type: String},
             dateOfControl: {type: Date},
             numberOfFrames: {type: Number},
             numberOfFullFrames: {type: Number},
@@ -30,8 +30,13 @@ const UserSchema = new mongoose.Schema(
             temperature: {type: Number},
             hostility: {type: Number},
             workDone: {type: String},
-            workToDo: {type: String},
-            isToDoDone: {type: Boolean},
+            workToDo: [
+              {
+                todoCustomId: {type: String},
+                text: {type: String},
+                isDone: {type: Boolean}
+              }
+            ],
           },
         ],
       },

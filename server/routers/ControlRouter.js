@@ -1,70 +1,34 @@
 const express = require('express');
 const router = express.Router();
 const UserModel = require('../models/UserModel');
-const { v4: uuidv4 } = require('uuid');
+const {v4: uuidv4} = require('uuid');
 
-router.get('/todos', async (req, res, next) => {
+router.post('/hive/:hiveNumber/editcontrol', async (req, res, next) => {
+  const hiveNumber = req.params.hiveNumber;
   const isUserLoggedIn = res.locals.isUserLoggedIn;
   if (isUserLoggedIn) {
     const username = res.locals.username;
+    const controlCustomId = req.body.controlCustomId;
     try {
-      const todosToGet = await UserModel.findOne(
-        {
-          username: username,
-        },
-        {
-          'hives.hiveNumber': 1,
-          'hives.controls.workToDo': 1,
-          'hives.controls.isToDoDone': 1,
-          'hives.controls.customId': 1,
+      const placeholder = {};
+      for (let [key, value] of Object.entries(req.body)) {
+        if(key === 'controlCustomId') {
+          continue;
         }
-      ).select({_id: 0});
-      return res.send(todosToGet);
-    } catch (err) {
-      console.log(err);
-      return res.send({status: 'error', error: "Todos couldn't be fetched."});
-    }
-  } else {
-    return res.send({
-      status: 'error',
-      data: 'Please login to access this feature.',
-    });
-  }
-});
-
-router.get('/hive/:hiveNumber/todos', async (req, res, next) => {
-  const isUserLoggedIn = res.locals.isUserLoggedIn;
-  if (isUserLoggedIn) {
-    const username = res.locals.username;
-    const hiveNumber = req.params.hiveNumber;
-    try {
-      let todosToGet = await UserModel.findOne(
-        {
-          username: username,
-          'hives.hiveNumber': hiveNumber,
-        },
-        {
-          'hives.hiveNumber': 1,
-          'hives.controls.workToDo.$': 1,
-          'hives.controls.isToDoDone': 1,
-          'hives.controls.customId': 1,
-        }
-      ).select({_id: 0});
-      if (todosToGet) {
-        todosToGet = todosToGet.hives;
-        return res.send({status: 'ok', data: todosToGet});
-      } else {
-        return res.send({
-          status: 'error',
-          error: 'you seem to be getting data from a hive which does not exist',
-        });
+        placeholder['hives.$[hive].controls.$[control].' + key] = value;
       }
+      console.log(placeholder);
+
+      const controlToUpdate = await UserModel.findOneAndUpdate(
+        {username: username},
+        {$set: placeholder},
+        {arrayFilters: [{'hive.hiveNumber': hiveNumber}, {'control.controlCustomId': controlCustomId}]}      
+      );
+      console.log(controlToUpdate);
+      res.send('meh ok')
     } catch (err) {
       console.log(err);
-      return res.send({
-        status: 'error',
-        error: `could not fetch todos from hive n° ${req.params.hiveNumber}`,
-      });
+      res.send('meh couldnt fetch');
     }
   } else {
     return res.send({
@@ -84,11 +48,14 @@ router.post('/hive/:hiveNumber/addcontrol', async (req, res, next) => {
     }
     try {
       const newControl = req.body;
-      newControl.customId = uuidv4();
-      console.log(typeof newControl.customId);
+      newControl.controlCustomId = uuidv4();
+      for (todo of newControl.workToDo) {
+        todo.todoCustomId = uuidv4();
+      }
       const hive = await UserModel.findOneAndUpdate(
         {username: username, 'hives.hiveNumber': hiveNumber},
-        {$push: {'hives.$.controls': newControl}}
+        {$push: {'hives.$[hive].controls': newControl}},
+        {arrayFilters: [{'hive.hiveNumber': hiveNumber}]}
       );
       if (hive) {
         return res.send({status: 'ok', data: 'Control has been added'});
@@ -110,22 +77,40 @@ router.post('/hive/:hiveNumber/addcontrol', async (req, res, next) => {
   }
 });
 
-router.post('/hive/:hiveNumber/updatetodo', async (req, res, next) => {
+router.post('/hive/:hiveNumber/deletecontrol', async (req, res, next) => {
   const isUserLoggedIn = res.locals.isUserLoggedIn;
-  const hiveNumber = req.params.hiveNumber;
   if (isUserLoggedIn) {
+    const username = res.locals.username;
+    const hiveNumber = req.params.hiveNumber;
+    const {controlCustomId} = req.body;
     try {
-      const username = res.locals.username;
-      const {customId, toDoValue} = req.body;
-      const toDoToUpdate = await UserModel.findOneAndUpdate(
-        {username: username, 'hives.controls.customId': customId, 'hives.hiveNumber': hiveNumber},
-        {$set: {'hives.$[].controls.$[control].isToDoDone': toDoValue}},
-        {arrayFilters: [{'control.customId': customId}]}
+      const controlToRemove = await UserModel.findOneAndUpdate(
+        {
+          username: username,
+          'hives.hiveNumber': hiveNumber,
+          'hives.controls.controlCustomId': controlCustomId,
+        },
+        {
+          $pull: {'hives.$[hive].controls': {controlCustomId: controlCustomId}},
+        },
+        {
+          arrayFilters: [{'hive.hiveNumber': hiveNumber}],
+        }
       );
-      return res.send({status: 'ok', data: 'todo has been updated successfully.'})
+      if (controlToRemove) {
+        return res.send({status: 'ok', data: 'control deleted successfully'});
+      } else {
+        return res.send({
+          status: 'error',
+          error: 'you seem to be deleting a control that does not exist',
+        });
+      }
     } catch (err) {
       console.log(err);
-      return res.send({status: 'error', error: 'todo could not be updated'})
+      return res.send({
+        status: 'error',
+        error: 'control could not be deleted, try again later.',
+      });
     }
   } else {
     return res.send({

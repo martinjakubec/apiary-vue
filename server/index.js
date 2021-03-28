@@ -41,10 +41,12 @@ app.use(express.static(path.join(__dirname, '..', 'public')));
 const HiveRouter = require('./routers/HiveRouter');
 const UserRouter = require('./routers/UserRouter');
 const ControlRouter = require('./routers/ControlRouter');
+const TodoRouter = require('./routers/TodoRouter');
 
 app.use(HiveRouter);
 app.use(UserRouter);
 app.use(ControlRouter);
+app.use(TodoRouter);
 
 app.get('/bzzz', (req, res, next) => {
   return res.send({status: 'bzzz', data: 'bzzz'});

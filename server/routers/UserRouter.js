@@ -23,7 +23,14 @@ router.post('/register', async (req, res, next) => {
         password: hashedPassword,
         email,
       });
-      return res.send({status: 'ok', data: 'User successfully registered.'});
+      if (addUserToDb) {
+        return res.send({status: 'ok', data: 'User successfully registered.'});
+      } else {
+        return res.send({
+          status: 'error',
+          error: 'Something went terribly wrong, please, try again later.',
+        });
+      }
     } catch (err) {
       if (err.code === 11000) {
         if (err.keyPattern?.username) {
@@ -85,7 +92,39 @@ router.post('/login', async (req, res, next) => {
   }
 });
 
-// meh delete to add
-router.post('/delete', (req, res, next) => {});
+router.post('/deleteuser', async (req, res, next) => {
+  // MEH MEH MEH
+  return res.send({status: 'critical error', error: 'stop trying to delete a user while testing your API, seriously.'})
+  const isUserLoggedIn = res.locals.isUserLoggedIn;
+  if (isUserLoggedIn) {
+    const username = res.locals.username;
+    try {
+      const userFromDb = await UserModel.findOneAndDelete(
+        {username: username},
+        {username: 1, password: 1}
+      );
+      console.log(userFromDb);
+      if (userFromDb) {
+        return res.send({
+          status: 'ok',
+          data: `user ${username} successfully deleted`,
+        });
+      } else {
+        return res.send({
+          status: 'error',
+          data:
+            'the account you are trying to delete does not exist. contact the admin to resolve this problem.',
+        });
+      }
+    } catch (err) {
+      console.log(err);
+      res.send({
+        status: 'error',
+        error:
+          "account couldn't be deleted, try again later or contact the admin.",
+      });
+    }
+  }
+});
 
 module.exports = router;
