@@ -2,6 +2,23 @@ const express = require('express');
 const router = express.Router();
 const UserModel = require('../models/UserModel');
 
+router.get('/hives', async (req, res, next) => {
+  const isUserLoggedIn = res.locals.isUserLoggedIn;
+  if (isUserLoggedIn) {
+    const username = res.locals.username;
+    try {
+      const hivesToGet = await UserModel.findOne(
+        {username: username},
+        {'hives.overalState': 1, 'hives.hiveNumber': 1, 'hives.hiveColor': 1, 'honeySuper': 1}
+      ).select({_id: 0});
+      res.send({status: 'ok', data: hivesToGet});
+    } catch (err) {
+      console.log(err);
+      res.send('meh error');
+    }
+  }
+});
+
 router.get('/hive/:id', async (req, res, next) => {
   const isUserLoggedIn = res.locals.isUserLoggedIn;
   if (isUserLoggedIn) {
@@ -14,7 +31,6 @@ router.get('/hive/:id', async (req, res, next) => {
       );
       if (hiveToGet) {
         hiveToGet = hiveToGet.hives[0]; // since hiveNumber is unique, it only makes sense that it will be on position 0
-        console.log(hiveToGet);
         return res.send({status: 'ok', data: hiveToGet});
       }
       return res.send({status: 'error', error: 'Hive could not be found.'});
@@ -37,27 +53,39 @@ router.get('/hive/:id', async (req, res, next) => {
 router.post('/addhive', async (req, res, next) => {
   const isUserLoggedIn = res.locals.isUserLoggedIn;
   if (isUserLoggedIn) {
-    let hiveNumbersAlreadyRegistered = await UserModel.find(
-      {username: req.body.username},
-      {'hives.hiveNumber': 1}
-    );
-    hiveNumbersAlreadyRegistered = hiveNumbersAlreadyRegistered[0].hives;
-    if (
-      hiveNumbersAlreadyRegistered.some(
-        (el) => el.hiveNumber === req.body.hiveNumber
-      )
-    ) {
+    const username = res.locals.username;
+    try {
+      let hiveNumbersAlreadyRegistered = await UserModel.find(
+        {username: username},
+        {'hives.hiveNumber': 1}
+      );
+      hiveNumbersAlreadyRegistered = hiveNumbersAlreadyRegistered[0].hives;
+      if (
+        hiveNumbersAlreadyRegistered.some(
+          (el) => el.hiveNumber === req.body.hiveNumber
+        )
+      ) {
+        return res.send({
+          status: 'error',
+          error:
+            'Hive with this number already exists, please, choose different number',
+        });
+      } else {
+        const hiveToAdd = await UserModel.findOneAndUpdate(
+          {username: username},
+          {$push: {hives: req.body}}
+        );
+        return res.send({
+          status: 'ok',
+          data: 'Hive has been added successfully',
+        });
+      }
+    } catch (err) {
+      console.log(err);
       return res.send({
         status: 'error',
-        error:
-          'Hive with this number already exists, please, choose different number',
+        error: 'hive could not be added, please try again later',
       });
-    } else {
-      const hiveToAdd = await UserModel.findOneAndUpdate(
-        {username: req.body.username},
-        {$push: {hives: req.body}}
-      );
-      return res.send({status: 'ok', data: 'Hive has been added successfully'});
     }
   } else {
     return res.send({
