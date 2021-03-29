@@ -12,23 +12,37 @@ router.post('/hive/:hiveNumber/editcontrol', async (req, res, next) => {
     try {
       const placeholder = {};
       for (let [key, value] of Object.entries(req.body)) {
-        if(key === 'controlCustomId') {
+        if (key === 'controlCustomId') {
           continue;
         }
         placeholder['hives.$[hive].controls.$[control].' + key] = value;
       }
-      console.log(placeholder);
 
       const controlToUpdate = await UserModel.findOneAndUpdate(
-        {username: username},
+        {
+          username: username,
+          'hives.hiveNumber': hiveNumber,
+          'hives.controls.controlCustomId': controlCustomId,
+        },
         {$set: placeholder},
-        {arrayFilters: [{'hive.hiveNumber': hiveNumber}, {'control.controlCustomId': controlCustomId}]}      
+        {
+          arrayFilters: [
+            {'hive.hiveNumber': hiveNumber},
+            {'control.controlCustomId': controlCustomId},
+          ],
+        }
       );
-      console.log(controlToUpdate);
-      res.send('meh ok')
+      if (controlToUpdate) {
+        return res.send({status: 'ok', data: 'control updated successfully'})
+      } else {
+        return res.send({status: 'error', error: 'you seem to be updating a control that does not exist'})
+      }
     } catch (err) {
       console.log(err);
-      res.send('meh couldnt fetch');
+      res.send({
+        status: 'error',
+        error: 'control could not be updated, try again later',
+      });
     }
   } else {
     return res.send({
