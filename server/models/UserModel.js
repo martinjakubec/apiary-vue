@@ -16,6 +16,7 @@ const UserSchema = new mongoose.Schema(
         queenBreed: {type: String},
         dateAdded: {type: Date},
         honeySuper: {type: Number},
+        honeyAmount: {type: Number, min: 0, max: 5},
         controls: [
           {
             controlCustomId: {type: String},

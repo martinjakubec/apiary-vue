@@ -12,8 +12,6 @@ const messages = {
   'Slovak': skLocale.default
 }
 
-console.log(messages);
-
 const i18n = createI18n({
   locale: 'English',
   fallbackLocale: 'English',

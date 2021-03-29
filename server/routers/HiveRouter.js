@@ -9,7 +9,13 @@ router.get('/hives', async (req, res, next) => {
     try {
       const hivesToGet = await UserModel.findOne(
         {username: username},
-        {'hives.overalState': 1, 'hives.hiveNumber': 1, 'hives.hiveColor': 1, 'honeySuper': 1}
+        {
+          'hives.overalState': 1,
+          'hives.hiveNumber': 1,
+          'hives.hiveColor': 1,
+          'hives.honeySuper': 1,
+          'hives.honeyAmount': 1,
+        }
       ).select({_id: 0});
       res.send({status: 'ok', data: hivesToGet});
     } catch (err) {
