@@ -15,7 +15,8 @@ router.get('/todos', async (req, res, next) => {
         {
           'hives.hiveNumber': 1,
           'hives.controls.workToDo': 1,
-          'hives.controls.customId': 1,
+          'hives.controls.controlCustomId': 1,
+          'hives.controls.dateOfControl': 1,
         }
       ).select({_id: 0});
       return res.send(todosToGet);
