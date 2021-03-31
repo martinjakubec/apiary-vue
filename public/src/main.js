@@ -11,8 +11,8 @@ const i18n = createI18n({
   locale: 'English',
   fallbackLocale: 'English',
   messages: {
-    English: enLocale.default,
-    Slovak: skLocale.default
+    'English': enLocale.default,
+    'Slovenčina': skLocale.default
   }
 })
 
