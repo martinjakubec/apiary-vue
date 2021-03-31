@@ -1,6 +1,14 @@
 {
-  "topNavBar": {
+  "pageTitles": {
+    "home": "Domov",
+    "hives": "Úle",
+    "todos": "Úlohy",
+    "profile": "Profil",
+    "manual": "Manuál",
     "register": "Registrácia",
     "login": "Prihlásiť sa"
+  },
+  "error": {
+    "errorTitle": "Chyba"
   }
 }
