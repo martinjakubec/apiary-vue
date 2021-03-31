@@ -1,6 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
 :root {
-  font-family: 'Open Sans', serif;
+  font-family: 'Open Sans', sans-serif;
   font-size: 10px;
+}
+
+
+h1 {
+  font-size: 5rem;
+  color: $dark-yellow;
+  font-weight: bold;
+  font-style: italic;
 }

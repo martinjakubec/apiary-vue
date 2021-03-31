@@ -51,9 +51,15 @@ html {
 }
 
 body {
-  height: 200vh;
+  // height: 200vh;
+  background-color: $dark-gray;
 }
 
 #app {
   position: relative;
+  height: 100%;
+}
+
+a {
+  outline: none;
 }
