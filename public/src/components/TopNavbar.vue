@@ -2,10 +2,10 @@
   <nav class="topnav">
     <router-link to="/" class="topnav-logo">{{ appName }}</router-link>
     <router-link to="/register" class="topnav-link">{{
-      $t('topNavBar.register')
+      $t('pageTitles.register')
     }}</router-link>
     <router-link to="/login" class="topnav-link">{{
-      $t('topNavBar.login')
+      $t('pageTitles.login')
     }}</router-link>
   </nav>
 </template>
@@ -35,16 +35,17 @@ export default {
   a {
     color: $dark-yellow;
     text-decoration: none;
-    font-size: 2.5rem;
+    font-size: 2rem;
     padding-left: 15px;
     font-weight: bold;
 
-    &:first-child {
+    &.topnav-logo {
+      font-size: 2.5rem;
       margin-right: auto;
-      padding-left: 10px;
+      padding-left: 22px;
     }
 
-    &:hover {
+    &:hover, &:focus {
       text-decoration: underline;
     }
   }
