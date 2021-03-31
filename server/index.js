@@ -35,7 +35,6 @@ app.use(express.json());
 const verifyUser = require('./middleware/verifyUser');
 app.use(verifyUser);
 
-app.use(express.static(path.join(__dirname, '..', 'public')));
 
 // routers
 const HiveRouter = require('./routers/HiveRouter');
@@ -43,13 +42,15 @@ const UserRouter = require('./routers/UserRouter');
 const ControlRouter = require('./routers/ControlRouter');
 const TodoRouter = require('./routers/TodoRouter');
 
-app.use(HiveRouter);
-app.use(UserRouter);
-app.use(ControlRouter);
-app.use(TodoRouter);
+app.use('/api', HiveRouter);
+app.use('/api', UserRouter);
+app.use('/api', ControlRouter);
+app.use('/api', TodoRouter);
 
 app.get('/bzzz', (req, res, next) => {
   return res.send({status: 'bzzz', data: 'bzzz'});
 });
+
+app.use('/', express.static(path.join(__dirname, '..', 'public', 'dist')));
 
 app.listen(process.env.PORT);
