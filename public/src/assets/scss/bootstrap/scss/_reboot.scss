@@ -44,14 +44,6 @@
 // 4. Change the default tap highlight to be completely transparent in iOS.
 
 body {
-  margin: 0; // 1
-  font-family: $font-family-base;
-  @include font-size($font-size-base);
-  font-weight: $font-weight-base;
-  line-height: $line-height-base;
-  color: $body-color;
-  text-align: $body-text-align;
-  background-color: $body-bg; // 2
   -webkit-text-size-adjust: 100%; // 3
   -webkit-tap-highlight-color: rgba($black, 0); // 4
 }
@@ -105,35 +97,35 @@ hr:not([size]) {
   color: $headings-color;
 }
 
-h1 {
-  @extend %heading;
-  @include font-size($h1-font-size);
-}
+// h1 {
+//   @extend %heading;
+//   @include font-size($h1-font-size);
+// }
 
-h2 {
-  @extend %heading;
-  @include font-size($h2-font-size);
-}
+// h2 {
+//   @extend %heading;
+//   @include font-size($h2-font-size);
+// }
 
-h3 {
-  @extend %heading;
-  @include font-size($h3-font-size);
-}
+// h3 {
+//   @extend %heading;
+//   @include font-size($h3-font-size);
+// }
 
-h4 {
-  @extend %heading;
-  @include font-size($h4-font-size);
-}
+// h4 {
+//   @extend %heading;
+//   @include font-size($h4-font-size);
+// }
 
-h5 {
-  @extend %heading;
-  @include font-size($h5-font-size);
-}
+// h5 {
+//   @extend %heading;
+//   @include font-size($h5-font-size);
+// }
 
-h6 {
-  @extend %heading;
-  @include font-size($h6-font-size);
-}
+// h6 {
+//   @extend %heading;
+//   @include font-size($h6-font-size);
+// }
 
 
 // Reset margins on paragraphs
