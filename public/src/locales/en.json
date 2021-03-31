@@ -1,4 +1,6 @@
 {
-  "message": "hello world",
-  "anotherMessage": "howdyhey"
+  "topNavBar": {
+    "register": "Register",
+    "login": "Login"
+  }
 }

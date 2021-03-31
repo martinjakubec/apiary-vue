@@ -1,3 +1,6 @@
 {
-  "message": "ahoj svet"
+  "topNavBar": {
+    "register": "Registrácia",
+    "login": "Prihlásiť sa"
+  }
 }
