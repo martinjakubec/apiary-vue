@@ -30,7 +30,7 @@ const UserSchema = new mongoose.Schema(
             weather: {type: String},
             temperature: {type: Number},
             hostility: {type: Number},
-            workDone: {type: String},
+            workDone: [String],
             workToDo: [
               {
                 todoCustomId: {type: String},
