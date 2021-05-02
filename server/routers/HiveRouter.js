@@ -22,6 +22,8 @@ router.get('/hives', async (req, res, next) => {
       console.log(err);
       res.send('meh error');
     }
+  } else {
+    return res.send({status: 'error', error: 'Please login to access this feature'})
   }
 });
 

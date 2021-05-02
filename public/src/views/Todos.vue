@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>{{$t('pageTitles.todos')}}</h1>
+    <h1>{{$t('locale.pageTitles.todos')}}</h1>
   </div>
 </template>
 

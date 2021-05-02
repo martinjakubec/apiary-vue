@@ -10,5 +10,12 @@
   },
   "error": {
     "errorTitle": "Chyba"
+  },
+  "input": {
+    "password": "Heslo",
+    "username": "Používateľské meno",
+    "login": "Prihlásiť sa",
+    "email": "E-mailová adresa",
+    "register": "Registrovať sa"
   }
 }

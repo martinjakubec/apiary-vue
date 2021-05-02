@@ -29,7 +29,7 @@ const routes = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/Hives.vue')
+    component: () => import(/* webpackChunkName: "hives" */ '../views/Hives.vue')
   },
   {
     path: '/todos',
@@ -37,7 +37,7 @@ const routes = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/Todos.vue')
+    component: () => import(/* webpackChunkName: "todos" */ '../views/Todos.vue')
   },
   {
     path: '/profile',
@@ -45,7 +45,7 @@ const routes = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/Profile.vue')
+    component: () => import(/* webpackChunkName: "profile" */ '../views/Profile.vue')
   },
   {
     path: '/manual',
@@ -53,7 +53,15 @@ const routes = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/Manual.vue')
+    component: () => import(/* webpackChunkName: "manual" */ '../views/Manual.vue')
+  },
+  {
+    path: '/hive/:id',
+    name: 'Hive',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "single hive" */ '../views/SingleHive.vue')
   }
 ]
 

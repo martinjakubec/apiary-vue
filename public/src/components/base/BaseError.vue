@@ -1,6 +1,6 @@
 <template>
-  <div v-if="isModalVisible" class="error-modal">
-    <p>{{$t('error.errorTitle')}}</p>
+  <div class="error-modal">
+    <p>{{$t('errorMessages.errorTitle')}}</p>
     <slot></slot>
     <base-button @button-clicked="$emit('close-error')">Close</base-button>
   </div>
@@ -10,9 +10,6 @@
 import BaseButton from './BaseButton.vue'
 export default {
   components: { BaseButton },
-  props: {
-    isModalVisible: Boolean
-  },
   emits: ['close-error']
 }
 </script>

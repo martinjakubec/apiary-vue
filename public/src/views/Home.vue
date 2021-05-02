@@ -1,9 +1,8 @@
 <template>
   <div>
-    <h1>{{ $t('pageTitles.home') }}</h1>
-    <base-error :isModalVisible="isErrorVisible" @close-error="closeError">
-      <p>toto je test text</p>
-    </base-error >
+    <h1>{{ $t('locale.pageTitles.home') }}</h1>
+    <base-error v-if="isErrorVisible" @close-error="closeError">
+    </base-error>
   </div>
 </template>
 
@@ -18,16 +17,13 @@ export default {
   },
   data() {
     return {
-      isErrorVisible: true
-    }
+      isErrorVisible: false,
+    };
   },
   methods: {
     closeError() {
-      this.isErrorVisible = false
-    }
-  },
-  beforeUnmount() {
-    console.log('imma get shreked');
+      this.isErrorVisible = false;
+    },
   },
 };
 </script>

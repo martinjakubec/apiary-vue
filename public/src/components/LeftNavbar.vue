@@ -1,10 +1,10 @@
 <template>
   <nav class="left-navbar">
-    <router-link class="left-navbar-link" to="/">{{$t('pageTitles.home')}}</router-link>
-    <router-link class="left-navbar-link" to="/hives">{{$t('pageTitles.hives')}}</router-link>
-    <router-link class="left-navbar-link space-after" to="/todos">{{$t('pageTitles.todos')}}</router-link>
-    <router-link class="left-navbar-link" to="/profile">{{$t('pageTitles.profile')}}</router-link>
-    <router-link class="left-navbar-link" to="/manual">{{$t('pageTitles.manual')}}</router-link>
+    <router-link class="left-navbar-link" to="/">{{$t('locale.pageTitles.home')}}</router-link>
+    <router-link v-if="isUserLoggedIn" class="left-navbar-link" to="/hives">{{$t('locale.pageTitles.hives')}}</router-link>
+    <router-link v-if="isUserLoggedIn" class="left-navbar-link space-after" to="/todos">{{$t('locale.pageTitles.todos')}}</router-link>
+    <router-link v-if="isUserLoggedIn" class="left-navbar-link" to="/profile">{{$t('locale.pageTitles.profile')}}</router-link>
+    <router-link class="left-navbar-link" to="/manual">{{$t('locale.pageTitles.manual')}}</router-link>
     <locale-switcher class="locale-switcher"></locale-switcher>
   </nav>
 </template>
@@ -14,6 +14,9 @@ import LocaleSwitcher from './LocaleSwitcher';
 export default {
   components: {
     LocaleSwitcher,
+  },
+  props: {
+    isUserLoggedIn: Boolean
   }  
 }
 </script>

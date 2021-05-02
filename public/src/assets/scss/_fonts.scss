@@ -3,12 +3,29 @@
 :root {
   font-family: 'Open Sans', sans-serif;
   font-size: 10px;
+  color: $dark-yellow;
 }
 
 
 h1 {
-  font-size: 5rem;
-  color: $dark-yellow;
+  font-size: 6rem;
   font-weight: bold;
   font-style: italic;
+  margin-bottom: 6rem;
+}
+
+p, label {
+  font-size: 1.6rem;
+}
+
+a {
+  color: $dark-yellow;
+
+  &:visited, &:active {
+    color: $dark-yellow;
+  }
+
+  &:hover {
+    color: $dark-yellow !important;
+  }
 }

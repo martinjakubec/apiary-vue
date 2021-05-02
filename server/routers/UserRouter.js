@@ -6,8 +6,20 @@ const jwt = require('jsonwebtoken');
 
 const JWT_SECRET = process.env.JWT_SECRET;
 
-router.get('/user', (req, res, next) => {
-  res.send('im a user');
+router.get('/user', async (req, res, next) => {
+  if (res.locals.isUserLoggedIn) {
+    const token = req.headers.authorization;
+    const username = jwt.decode(token).username;
+    try {
+      const userToFind = await UserModel.findOne({username: username}, {})
+
+    } catch(err) {
+      console.log(err);
+    }
+    res.send({status: 'ok', data: 'data'})
+  } else {
+    res.send({status: 'error', error: 'please login to access this feature'})
+  }
 });
 
 router.post('/register', async (req, res, next) => {
@@ -124,6 +136,20 @@ router.post('/deleteuser', async (req, res, next) => {
           "account couldn't be deleted, try again later or contact the admin.",
       });
     }
+  }
+});
+
+router.post('/validateToken', async (req, res, next) => {
+  if (res.locals.isUserLoggedIn) {
+    return res.json({
+      status: 'ok',
+      data: 'Your token is validated, continue with using the site.',
+    });
+  } else {
+    return res.json({
+      status: 'error',
+      error: 'Your token is invalid, pelase, login again',
+    });
   }
 });
 
