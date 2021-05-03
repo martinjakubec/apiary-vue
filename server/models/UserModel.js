@@ -9,6 +9,7 @@ const UserSchema = new mongoose.Schema(
       {
         overalState: {type: String},
         hiveNumber: {type: Number},
+        hiveDescription: {type: String},
         hiveColor: {type: String},
         totalNumberOfFrames: {type: Number},
         queenColor: {type: String},
