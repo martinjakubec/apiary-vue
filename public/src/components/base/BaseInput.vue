@@ -1,5 +1,9 @@
 <template>
-  <div v-if="$props.inputType === 'radio'" class="radio " :class="$props.isBigRadio ? 'radio-big' : ''">
+  <div
+    v-if="$props.inputType === 'radio'"
+    class="radio "
+    :class="$props.isBigRadio ? 'radio-big' : ''"
+  >
     <input
       :type="inputType"
       :placeholder="placeholder"
@@ -12,6 +16,20 @@
     />
     <label :for="$props.id"><slot></slot></label>
   </div>
+
+  <select
+    v-else-if="$props.inputType === 'select'"
+    class="select"
+    :name="name"
+    :id="id"
+  >
+    <option
+      v-for="selectValue of selectValues"
+      :key="selectValue.value"
+      :value="selectValue.value"
+      >{{ selectValue.description }}</option
+    >
+  </select>
 
   <input
     v-else
@@ -32,7 +50,15 @@ export default {
       type: String,
       validator: function(value) {
         return (
-          ['text', 'number', 'password', 'email', 'radio'].indexOf(value) !== -1
+          [
+            'text',
+            'number',
+            'password',
+            'email',
+            'radio',
+            'color',
+            'select',
+          ].indexOf(value) !== -1
         );
       },
     },
@@ -43,7 +69,10 @@ export default {
     value: String,
     isBigRadio: {
       type: Boolean,
-      default: false
+      default: false,
+    },
+    selectValues: {
+      type: Array,
     },
   },
   computed: {
@@ -62,7 +91,9 @@ export default {
 input[type='text'],
 input[type='password'],
 input[type='email'],
-input[type='number'] {
+input[type='color'],
+input[type='number'],
+.select {
   color: $dark-yellow;
   font-size: 1.6rem;
   padding: 1.3rem;
@@ -85,6 +116,12 @@ input[type='number'] {
   }
 }
 
+input[type='color'] {
+  padding: 0.5rem;
+  padding-right: 2.5rem;
+  cursor: pointer;
+}
+
 .radio {
   position: relative;
   width: 60px;
@@ -104,8 +141,6 @@ input[type='number'] {
       }
     }
   }
-
-
 
   input[type='radio'] {
     appearance: none;
