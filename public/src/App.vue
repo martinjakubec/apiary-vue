@@ -6,7 +6,7 @@
     :isUserLoggedIn="isUserLoggedIn"
     @user-logout="handleUserLogout"
   />
-  <left-navbar :isUserLoggedIn="isUserLoggedIn" />
+  <left-navbar :isUserLoggedIn="isUserLoggedIn" v-if="isUserLoggedIn" />
   <div class="router-view">
     <router-view
       :isUserLoggedIn="isUserLoggedIn"

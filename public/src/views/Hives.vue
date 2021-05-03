@@ -19,16 +19,57 @@
         <base-input
           :name="'hiveNumber'"
           :inputType="'number'"
-          :placeholder="'Hive Number'"
+          :placeholder="'Hive number'"
           :autocomplete="'off'"
+        ></base-input>
+        <base-input
+          :name="'hiveDescription'"
+          :inputType="'text'"
+          :placeholder="'Short description'"
+          :autocomplete="'off'"
+        ></base-input>
+        <base-input
+          :name="'totalNumberOfFrames'"
+          :inputType="'number'"
+          :placeholder="'Total number of frames'"
+          :autocomplete="'off'"
+        ></base-input>
+        <base-input
+          :name="'queenColor'"
+          :inputType="'select'"
+          :placeholder="'Color of the queen'"
+          :selectValues="[
+            {
+              value: 'white',
+              description: 'White',
+            },
+            {
+              value: 'yellow',
+              description: 'Yellow',
+            },
+            {
+              value: 'red',
+              description: 'Red',
+            },
+            {
+              value: 'green',
+              description: 'Green',
+            },
+            {
+              value: 'blue',
+              description: 'Blue',
+            }
+          ]"
         ></base-input>
         <base-input
           :name="'hiveColor'"
           :inputType="'color'"
-          :placeholder="'Hive Color'"
+          :placeholder="'Hive color'"
           :autocomplete="'off'"
         ></base-input>
-        <base-button :buttonType="'full'" :buttonSize="'normal'" >Submit</base-button>
+        <base-button :buttonType="'full'" :buttonSize="'normal'"
+          >Submit</base-button
+        >
       </base-form>
     </base-modal>
   </div>
@@ -75,7 +116,7 @@ export default {
     async handleAddHive(e) {
       console.log(e.target.hiveColor.value);
       this.isModalVisible = false;
-    }
+    },
   },
   async created() {
     if (this.isUserLoggedIn) {
