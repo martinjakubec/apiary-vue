@@ -15,6 +15,7 @@ router.get('/hives', async (req, res, next) => {
           'hives.hiveColor': 1,
           'hives.honeySuper': 1,
           'hives.honeyAmount': 1,
+          'hives.hiveDescription': 1,
         }
       ).select({_id: 0});
       res.send({status: 'ok', data: hivesToGet});
@@ -106,9 +107,10 @@ router.post('/addhive', async (req, res, next) => {
 router.post('/deletehive', async (req, res, next) => {
   const isUserLoggedIn = res.locals.isUserLoggedIn;
   if (isUserLoggedIn) {
+    const username = res.locals.username;
     try {
       const hiveToDelete = await UserModel.updateOne(
-        {username: req.body.username},
+        {username},
         {
           $pull: {hives: {hiveNumber: req.body.hiveNumber}},
         }
@@ -136,8 +138,8 @@ router.post('/hive/:id/edit', async (req, res, next) => {
   const isUserLoggedIn = res.locals.isUserLoggedIn;
   const hiveNumber = req.params.id;
   if (isUserLoggedIn) {
+    const username = res.locals.username;
     try {
-      const username = req.body.username;
       const editOptions = req.body;
       let canHiveNumberBeChanged = true;
       if (editOptions.hiveNumber) {
