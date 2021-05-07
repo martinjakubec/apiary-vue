@@ -15,10 +15,10 @@
       @user-logged-in="handleUserLogin"
     >
       <template v-slot="{Component}">
-        <keep-alive v-if="isUserLoggedIn">
+        <!-- <keep-alive v-if="isUserLoggedIn">
           <component :is="Component" :key="$route.fullPath" />
-        </keep-alive>
-        <component v-else :is="Component" :key="$route.fullPath" />
+        </keep-alive> -->
+        <component :is="Component" :key="$route.fullPath" />
       </template>
     </router-view>
   </div>
@@ -134,6 +134,8 @@ export default {
 <style lang="scss">
 .router-view {
   padding-left: 250px;
+  padding-right: 50px;
   padding-top: 35px;
+  padding-bottom: 40px;
 }
 </style>
