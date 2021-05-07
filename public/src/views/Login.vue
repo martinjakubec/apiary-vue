@@ -2,18 +2,18 @@
   <div>
     <h1>{{ $t('locale.pageTitles.login') }}</h1>
     <form class="inputs" @submit.prevent="$emit('user-logged-in', $event)">
-      <base-input
-        :inputType="'text'"
-        :placeholder="$t('locale.input.username')"
-        :autocomplete="'off'"
+      <input-text
+        :isRequired="true"
+        :label="$t('locale.input.username')"
+        :id="'username'"
         :name="'username'"
-      ></base-input>
-      <base-input
-        :inputType="'password'"
-        :placeholder="$t('locale.input.password')"
-        :autocomplete="'off'"
+      ></input-text>
+      <input-password
+        :isRequired="true"
+        :label="$t('locale.input.password')"
+        :id="'password'"
         :name="'password'"
-      ></base-input>
+      ></input-password>
       <base-button :isGhostButton="false">{{
         $t('locale.input.login')
       }}</base-button>
@@ -26,11 +26,12 @@
 
 <script>
 import BaseButton from '../components/base/BaseButton.vue';
-import BaseInput from '../components/base/BaseInput.vue';
+import InputPassword from '../components/base/inputs/InputPassword.vue';
+import InputText from '../components/base/inputs/InputText.vue';
 // @ is an alias to /src
 
 export default {
-  components: {BaseInput, BaseButton},
+  components: {BaseButton, InputText, InputPassword},
   name: 'Login',
   emits: ['error-emitted', 'user-logged-in'],
 };

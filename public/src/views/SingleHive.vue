@@ -23,7 +23,6 @@ export default {
   data() {
     return {
       hiveData: {},
-      isInEditMode: false,
     };
   },
   methods: {

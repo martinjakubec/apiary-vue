@@ -5,24 +5,24 @@
       <p v-if="registrationSuccessful">
         Registration successful, you will be redirected to login page.
       </p>
-      <base-input
-        :inputType="'text'"
-        :placeholder="$t('locale.input.username')"
-        :autocomplete="'off'"
+      <input-text
+        :isRequired="true"
+        :label="$t('locale.input.username')"
+        :id="'username'"
         :name="'username'"
-      ></base-input>
-      <base-input
-        :inputType="'email'"
-        :placeholder="$t('locale.input.email')"
-        :autocomplete="'off'"
-        :name="'email'"
-      ></base-input>
-      <base-input
-        :inputType="'password'"
-        :placeholder="$t('locale.input.password')"
-        :autocomplete="'off'"
+      ></input-text>
+      <input-email
+        :isRequired="true"
+        :label="$t('locale.input.email')"
+        :id="'password'"
         :name="'password'"
-      ></base-input>
+      ></input-email>
+      <input-password
+        :isRequired="true"
+        :label="$t('locale.input.password')"
+        :id="'password'"
+        :name="'password'"
+      ></input-password>
       <base-button :isGhostButton="false">{{
         $t('locale.input.register')
       }}</base-button>
@@ -32,14 +32,18 @@
 
 <script>
 // @ is an alias to /src
-import BaseInput from '../components/base/BaseInput';
 import BaseButton from '../components/base/BaseButton';
+import InputEmail from '../components/base/inputs/InputEmail.vue';
+import InputText from '../components/base/inputs/InputText.vue';
+import InputPassword from '../components/base/inputs/InputPassword.vue';
 
 export default {
   name: 'Register',
   components: {
-    BaseInput,
     BaseButton,
+    InputEmail,
+    InputText,
+    InputPassword,
   },
   emits: ['error-emitted'],
   data() {
@@ -74,7 +78,7 @@ export default {
             this.registrationSuccessful = true;
             setTimeout(() => {
               this.$router.push('/login');
-            }, 3000)
+            }, 3000);
           } else {
             console.log(registerRequestResponse.error);
             this.$emit('error-emitted', registerRequestResponse.error);
