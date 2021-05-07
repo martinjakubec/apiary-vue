@@ -31,16 +31,16 @@ export default {
 
 <style lang="scss" scoped>
 .base-modal {
-  position: absolute;
-  z-index: 50;
+  position: fixed;
+  z-index: 99999;
   top: 0;
   left: 0;
-  // transform: translate(-50%);
   width: 100vw;
   height: 100vh;
   background-color: transparentize($lighter-gray, $amount: 0.3);
 
   &-wrapper {
+  overflow-y: scroll;
     transform: translate(-50%, -50%);
     width: 80%;
     height: 80%;
@@ -54,9 +54,10 @@ export default {
   }
 
   .button-close {
-    position: absolute;
-    top: 0px;
-    right: 0px;
+    position: sticky;
+    top: 10px;
+    left: 100%;
+    margin-bottom: -200%;
 
     &::before,
     &::after {

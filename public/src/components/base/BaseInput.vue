@@ -31,16 +31,19 @@
     >
   </select>
 
-  <input
-    v-else
-    :type="inputType"
-    :placeholder="placeholder"
-    :autocomplete="autocompleteOff"
-    :list="autocompleteOff"
-    :id="id"
-    :name="name"
-    :value="value"
-  />
+  <div v-else class="input-wrapper">
+    <slot></slot>
+    <input
+      :type="inputType"
+      :placeholder="placeholder"
+      :autocomplete="autocompleteOff"
+      :list="autocompleteOff"
+      :id="id"
+      :name="name"
+      :value="value"
+      :required="isRequired"
+    />
+  </div>
 </template>
 
 <script>
@@ -74,6 +77,7 @@ export default {
     selectValues: {
       type: Array,
     },
+    isRequired: Boolean,
   },
   computed: {
     autocompleteOff() {
@@ -101,7 +105,8 @@ input[type='number'],
   border-radius: 10px;
   border: 3px solid $lighter-gray;
   outline: none;
-  width: 350px;
+  min-width: 250px;
+  max-width: 350px;
   margin-bottom: 3rem;
   box-sizing: border-box;
   height: 50px;
@@ -120,6 +125,14 @@ input[type='color'] {
   padding: 0.5rem;
   padding-right: 2.5rem;
   cursor: pointer;
+}
+
+.input-wrapper {
+  &::v-deep label {
+    display: block;
+    padding-left: 2rem;
+    margin-bottom: 0.5rem;
+  }
 }
 
 .radio {

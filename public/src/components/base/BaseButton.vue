@@ -5,7 +5,7 @@
 </template>
 
 <script>
-const acceptedTypes = ['ghost', 'full'];
+const acceptedTypes = ['ghost', 'full', 'danger'];
 const acceptedSizes = ['normal', 'square-small', 'square-big', 'tiny'];
 
 export default {
@@ -36,7 +36,7 @@ export default {
 
 <style lang="scss" scoped>
 .button {
-  margin: 10px;
+  margin: 10px 0;
   padding: 10px 20px;
   min-height: 50px;
   min-width: 120px;
@@ -74,6 +74,19 @@ export default {
     &:hover,
     &:focus {
       background-color: $dark-yellow;
+      color: $dark-gray;
+    }
+  }
+  
+  &.danger {
+    background-color: transparent;
+    border: 3px solid $danger-red;
+    color: $danger-red;
+    transition-property: background-color, color;
+    transition-duration: 0.15s;
+    &:hover,
+    &:focus {
+      background-color: $danger-red;
       color: $dark-gray;
     }
   }
