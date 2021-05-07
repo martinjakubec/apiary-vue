@@ -37,6 +37,7 @@ export default {
   padding: 20px 10px;
   background-color: $lighter-gray;
   justify-content: flex-end;
+  z-index: 99;
 
   a {
     color: $dark-yellow;
@@ -44,6 +45,7 @@ export default {
     font-size: 2rem;
     padding-left: 15px;
     font-weight: bold;
+    cursor: pointer;
 
     &.topnav-logo {
       font-size: 2.5rem;
