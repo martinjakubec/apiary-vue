@@ -8,14 +8,14 @@ const UserSchema = new mongoose.Schema(
     hives: [
       {
         overalState: {type: String},
-        hiveNumber: {type: Number},
-        hiveDescription: {type: String},
+        hiveNumber: {type: Number, required: true}, 
+        hiveDescription: {type: String}, 
+        totalNumberOfFrames: {type: Number, required: true},
         hiveColor: {type: String},
-        totalNumberOfFrames: {type: Number},
-        queenColor: {type: String},
+        queenBreed: {type: String, required: true}, 
         queenNumber: {type: Number},
-        queenBreed: {type: String},
-        dateAdded: {type: Date},
+        queenColor: {type: String, required: true}, 
+        dateAdded: {type: Date, required: true},
         honeySuper: {type: Number},
         honeyAmount: {type: Number, min: 0, max: 5},
         controls: [
