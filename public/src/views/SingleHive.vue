@@ -3,8 +3,9 @@
     <single-hive-head
       :hiveData="hiveData"
       @update-hives="fetchHiveData"
+      class="hive-head"
     ></single-hive-head>
-    <!-- single-hive-controls -->
+    <controls-list :controls="hiveData.controls"></controls-list>
     <base-button :buttonType="'danger'" @click="deleteHive"
       >Delete hive</base-button
     >
@@ -13,11 +14,12 @@
 
 <script>
 import BaseButton from '../components/base/BaseButton.vue';
+import ControlsList from '../components/singleHiveComponents/ControlsList.vue';
 import SingleHiveHead from '../components/singleHiveComponents/SingleHiveHead.vue';
 // @ is an alias to /src
 
 export default {
-  components: {SingleHiveHead, BaseButton},
+  components: {SingleHiveHead, BaseButton, ControlsList},
   name: 'SingleHive',
   emits: ['error-emitted'],
   data() {
@@ -42,6 +44,7 @@ export default {
         const fetchHiveResponse = await fetchHiveRequest.json();
         if (fetchHiveResponse.status === 'ok') {
           this.hiveData = fetchHiveResponse.data;
+          console.log(this.hiveData.controls);
         } else {
           this.$emit('error-emitted', fetchHiveResponse.error);
           this.$router.push('/hives');
@@ -134,5 +137,9 @@ h2 {
 .description-label {
   font-weight: bold;
   color: $dark-yellow;
+}
+
+.hive-head {
+  margin-bottom: 3.5rem;
 }
 </style>

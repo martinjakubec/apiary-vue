@@ -9,7 +9,7 @@
     >
     <option v-for="option of options" :key="option.value" :value="option.value" :selected="true">{{option.name}}</option>
     </select>
-  </div>
+  </div>  
 </template>
 
 <script>
