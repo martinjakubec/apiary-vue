@@ -3,7 +3,7 @@ module.exports = {
     directives: {
       defaultSrc: ["'self'"],
       objectSrc: ["'self'"],
-      scriptSrc: ["'self'"],
+      scriptSrc: ["'self'", "'unsafe-eval'"],
       styleSrc: ["'self'"],
       fontSrc: ["'self'"],
       // baseUri: ['self'],
