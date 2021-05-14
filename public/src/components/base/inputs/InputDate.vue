@@ -1,6 +1,6 @@
 <template>
   <div class="input-wrapper">
-    <label :class="{'has-value': hasValue}" :for="id">{{ label }}</label>
+    <label :class="{'has-value': hasValue, 'is-required': isRequired}" :for="id">{{ label }}</label>
     <input
       type="date"
       v-model="value"
@@ -62,6 +62,12 @@ export default {
       transition-duration: 0.3s;
       background-color: transparent;
       transition-property: top;
+    }
+
+    &.is-required {
+      &::after {
+        content: "*";
+      }
     }
   }
   input {

@@ -19,7 +19,7 @@ export default {
     id: {type: String, required: true},
     name: {type: String, required: true},
     isRequired: {type: Boolean},
-    options: {type: Array, required: true},
+    options: {type: Array, required: true}, // object with value and name keys
     defaultValue: {type: String}
   },
   data() {

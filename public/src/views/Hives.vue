@@ -30,7 +30,6 @@
 
     <base-modal
       v-if="isModalVisible"
-      :stages="10"
       @close-modal="isModalVisible = false"
     >
       <base-form :isFullWidth="true" @submit.prevent="handleAddHive">
@@ -62,7 +61,6 @@
           :id="'queenBreed'"
           :name="'queenBreed'"
           :label="'Queen breed'"
-          :isRequired="true"
         />
         <input-number
           :id="'queenNumber'"
@@ -83,7 +81,6 @@
             {value: 'blue', name: 'Blue'},
             {value: 'N/A', name: 'Not marked', isDefault: true},
           ]"
-          :isRequired="true"
         />
         <input-date
           :id="'dateAdded'"

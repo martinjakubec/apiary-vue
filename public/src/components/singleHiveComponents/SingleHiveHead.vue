@@ -9,7 +9,7 @@
         {{ hiveData.hiveDescription }}
       </h2>
       <information-view v-if="!isInEditMode" :hiveData="hiveData" @open-edit="openEditMode"></information-view>
-      <edit-view v-else :hiveData="hiveData" @close-edit="closeEditMode" @error="$emit('error-emitted')" @update-hives="$emit('update-hives')"></edit-view>
+      <edit-view v-else :hiveData="hiveData" @close-edit="closeEditMode" @error="$emit('error-emitted')" @update-hives="$emit('update-hive')"></edit-view>
     </div>
   </div>
 </template>
@@ -25,7 +25,7 @@ export default {
       required: true,
     },
   },
-  emits: ['update-hives', 'error-emitted'],
+  emits: ['update-hive', 'error-emitted'],
   data() {
     return {
       isInEditMode: false,

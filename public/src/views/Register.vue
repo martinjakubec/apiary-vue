@@ -14,8 +14,8 @@
       <input-email
         :isRequired="true"
         :label="$t('locale.input.email')"
-        :id="'password'"
-        :name="'password'"
+        :id="'email'"
+        :name="'email'"
       ></input-email>
       <input-password
         :isRequired="true"

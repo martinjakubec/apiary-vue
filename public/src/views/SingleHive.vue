@@ -2,10 +2,10 @@
   <div>
     <single-hive-head
       :hiveData="hiveData"
-      @update-hives="fetchHiveData"
+      @update-hive="fetchHiveData"
       class="hive-head"
     ></single-hive-head>
-    <controls-list :controls="hiveData.controls"></controls-list>
+    <controls-list :controls="hiveData.controls" @update-hive="fetchHiveData"></controls-list>
     <base-button :buttonType="'danger'" @click="deleteHive"
       >Delete hive</base-button
     >
@@ -24,7 +24,9 @@ export default {
   emits: ['error-emitted'],
   data() {
     return {
-      hiveData: {},
+      hiveData: {
+        controls: []
+      },
     };
   },
   methods: {
@@ -44,7 +46,6 @@ export default {
         const fetchHiveResponse = await fetchHiveRequest.json();
         if (fetchHiveResponse.status === 'ok') {
           this.hiveData = fetchHiveResponse.data;
-          console.log(this.hiveData.controls);
         } else {
           this.$emit('error-emitted', fetchHiveResponse.error);
           this.$router.push('/hives');
@@ -54,12 +55,12 @@ export default {
       }
     },
     async deleteHive() {
-      const verificationNumber = parseInt(
-        prompt(
-          'You are about to delete this hive permanently. Write the hive number to confirm this.'
-        )
+      const verificationNumber = prompt(
+        'You are about to delete this hive permanently. Write the hive number to confirm this.'
       );
-      if (verificationNumber === this.hiveData.hiveNumber) {
+      if (verificationNumber === null) {
+        return;
+      } else if (parseInt(verificationNumber) === this.hiveData.hiveNumber) {
         const token = localStorage.getItem('token');
         const requestBody = {
           hiveNumber: this.hiveData.hiveNumber,

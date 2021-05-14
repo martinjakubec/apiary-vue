@@ -17,10 +17,6 @@ import BaseButton from './BaseButton.vue';
 export default {
   components: {BaseButton},
   props: {
-    stages: {
-      type: Number,
-      required: true,
-    },
   },
   emits: ['close-modal'],
   created() {
