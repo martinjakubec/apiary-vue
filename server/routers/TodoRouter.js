@@ -14,12 +14,12 @@ router.get('/todos', async (req, res, next) => {
         },
         {
           'hives.hiveNumber': 1,
-          'hives.controls.workToDo': 1,
           'hives.controls.controlCustomId': 1,
           'hives.controls.dateOfControl': 1,
+          'hives.controls.workToDo': 1,
         }
       ).select({_id: 0});
-      return res.send(todosToGet);
+      return res.send({status: 'ok', data: todosToGet});
     } catch (err) {
       console.log(err);
       return res.send({status: 'error', error: "Todos couldn't be fetched."});
