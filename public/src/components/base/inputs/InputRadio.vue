@@ -6,6 +6,7 @@
       :name="name"
       :value="value"
       :bigRadio="bigRadio"
+      :checked="isChecked"
     />
     <label :for="$props.id">{{ $props.label }}</label>
   </div>
@@ -19,7 +20,13 @@ export default {
     label: {type: String},
     value: {type: Boolean},
     bigRadio: {type: Boolean},
+    checked: {type: Boolean}
   },
+  computed: {
+    isChecked() {
+      return this.$props.checked === true ? true : false;
+    }
+  }
 };
 </script>
 
