@@ -67,8 +67,6 @@ export default {
     border-collapse: collapse;
     :deep(td) {
       padding: 7px 15px;
-      // min-width: 50px;
-      // max-width: 300px;
     }
     thead {
       // width: 100%;

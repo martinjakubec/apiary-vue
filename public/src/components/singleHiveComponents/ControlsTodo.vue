@@ -26,6 +26,9 @@ export default {
       workDone: [],
     };
   },
+  props: {
+    defaultValue: {type: Array}
+  },
   methods: {
     addItem(e) {
       const workDoneItem = e.target.value;
@@ -48,6 +51,11 @@ export default {
       return this.workDone;
     },
   },
+  created() {
+    if (this.$props.defaultValue) {
+      this.workDone = this.$props.defaultValue;
+    }
+  }
 };
 </script>
 

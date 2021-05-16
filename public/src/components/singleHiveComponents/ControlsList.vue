@@ -4,7 +4,12 @@
     <base-button :buttonType="'ghost'" @click="openModal"
       >Add control</base-button
     >
-    <controls-table :controls="$props.controls" @update-hive="$emit('update-hive')" @error-emitted="$emit('error-emitted')" />
+    <controls-table
+      v-if="hasControls"
+      :controls="$props.controls"
+      @update-hive="$emit('update-hive')"
+      @error-emitted="$emit('error-emitted')"
+    />
     <base-modal v-if="isModalVisible" @close-modal="closeModal">
       <base-form @submit.prevent="handleAddControl">
         <input-date
@@ -137,6 +142,15 @@ export default {
     return {
       isModalVisible: false,
     };
+  },
+  computed: {
+    hasControls() {
+      if (this.$props.controls.length > 0) {
+        return true;
+      } else {
+        return false;
+      }
+    },
   },
   props: {
     controls: {
