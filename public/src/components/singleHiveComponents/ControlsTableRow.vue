@@ -19,7 +19,7 @@
       </span>
     </td>
     <td class="wide-cell">
-      <span v-for="workToDo of $props.control.workToDo" :key="workToDo.text">
+      <span v-for="workToDo of $props.control.workToDo" :key="workToDo.text" :class="{'done': workToDo.isDone}">
         - {{ workToDo.text }}
         <br />
       </span>
@@ -331,5 +331,11 @@ export default {
 }
 .wide-cell {
   min-width: 220px;
+}
+
+span {
+  &.done {
+    text-decoration: line-through;
+  }
 }
 </style>
