@@ -5,7 +5,10 @@
       @update-hive="fetchHiveData"
       class="hive-head"
     ></single-hive-head>
-    <controls-list :controls="hiveData.controls" @update-hive="fetchHiveData"></controls-list>
+    <controls-list
+      :controls="hiveData.controls"
+      @update-hive="fetchHiveData"
+    ></controls-list>
     <base-button :buttonType="'danger'" @click="deleteHive"
       >Delete hive</base-button
     >
@@ -25,7 +28,7 @@ export default {
   data() {
     return {
       hiveData: {
-        controls: []
+        controls: [],
       },
     };
   },
@@ -46,6 +49,11 @@ export default {
         const fetchHiveResponse = await fetchHiveRequest.json();
         if (fetchHiveResponse.status === 'ok') {
           this.hiveData = fetchHiveResponse.data;
+          const sortedControlsByDate = Array.from(this.hiveData.controls).sort(
+            (control, control2) =>
+              new Date(control.dateOfControl) - new Date(control2.dateOfControl)
+          );
+          this.hiveData.controls = sortedControlsByDate;
         } else {
           this.$emit('error-emitted', fetchHiveResponse.error);
           this.$router.push('/hives');

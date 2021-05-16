@@ -34,6 +34,7 @@ export default {
     align-items: left;
     padding-left: 30px;
     padding-top: 30px;
+    z-index: 98;
 
     .locale-switcher {
       margin-top: auto;

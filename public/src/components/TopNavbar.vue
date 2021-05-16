@@ -28,8 +28,9 @@ export default {
 
 <style lang="scss" scoped>
 .topnav {
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
   width: 100%;
   height: 60px;
   display: flex;

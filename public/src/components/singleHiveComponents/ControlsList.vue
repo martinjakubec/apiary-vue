@@ -4,9 +4,7 @@
     <base-button :buttonType="'ghost'" @click="openModal"
       >Add control</base-button
     >
-    <p v-for="control of $props.controls" :key="control.controlCustomid">
-      coucou
-    </p>
+    <controls-table :controls="$props.controls" @update-hive="$emit('update-hive')" @error-emitted="$emit('error-emitted')" />
     <base-modal v-if="isModalVisible" @close-modal="closeModal">
       <base-form @submit.prevent="handleAddControl">
         <input-date
@@ -77,7 +75,7 @@
         <input-select
           :options="[
             {name: 'Sunny/Clear', value: 'sunny'},
-            {name: 'parially cloudy', value: 'partiallyCloudy'},
+            {name: 'Partially cloudy', value: 'partiallyCloudy'},
             {name: 'Overcast', value: 'overcast'},
             {name: 'Rain', value: 'rain'},
             {name: 'Drizzle', value: 'drizzle'},
@@ -120,6 +118,7 @@ import InputNumber from '../base/inputs/InputNumber.vue';
 import InputRadio from '../base/inputs/InputRadio.vue';
 import InputRadioWrapper from '../base/inputs/InputRadioWrapper.vue';
 import InputSelect from '../base/inputs/InputSelect.vue';
+import ControlsTable from './ControlsTable.vue';
 import ControlsTodo from './ControlsTodo.vue';
 export default {
   components: {
@@ -132,6 +131,7 @@ export default {
     InputRadioWrapper,
     InputSelect,
     ControlsTodo,
+    ControlsTable,
   },
   data() {
     return {
@@ -154,7 +154,7 @@ export default {
     },
     async handleAddControl(e) {
       const form = e.target;
-      const dateOfControl = Date(form.dateOfControl.value);
+      const dateOfControl = new Date(form.dateOfControl.value);
       const numberOfFrames = Number(form.numberOfFrames.value);
       const numberOfFullFrames = Number(form.numberOfFullFrames.value);
       const numberOfFramesWithSealedBrood = Number(
