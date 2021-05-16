@@ -1,7 +1,8 @@
 <template>
   <div>
     <h1>{{ $t('locale.pageTitles.hives') }}</h1>
-    <p v-if="!hasHives">
+    <p v-if="isLoading">Loading...</p>
+    <p v-else-if="!hasHives">
       You don't seem to have any hives, feel free to add your first one!
     </p>
     <base-button
@@ -132,6 +133,7 @@ export default {
     return {
       hives: [],
       isModalVisible: false,
+      isLoading: true,
     };
   },
   computed: {
@@ -173,6 +175,7 @@ export default {
         if (hivesResponse.status === 'ok') {
           const filteredHives = hivesResponse.data.hives.sort((a, b) => a.hiveNumber - b.hiveNumber)
           this.hives = filteredHives;
+          this.isLoading = false;
           // console.log(this.hives);
         } else {
           this.$emit('error-emitted', hivesResponse.error);
