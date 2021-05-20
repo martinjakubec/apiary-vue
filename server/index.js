@@ -24,11 +24,9 @@ const db = mongoose.connect(
 
 const app = express();
 
-const helmetDirectives = require('./config/helmetConfig');
-
 const MODE = process.env.MODE;
 if (MODE === 'production') {
-  const helmetDirectives = require('./helmet-setup/directives');
+  const helmetDirectives = require('./config/helmetConfig');
   app.use(helmet(helmetDirectives));
 } else if (MODE === 'dev') {
   app.use(helmet());
@@ -36,7 +34,6 @@ if (MODE === 'production') {
   app.use(helmet());
 }
 
-app.use(helmet(helmetDirectives));
 app.use(cors());
 
 app.use(express.urlencoded({extended: true}));
