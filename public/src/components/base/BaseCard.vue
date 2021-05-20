@@ -1,13 +1,25 @@
 <template>
-  <div class="card">
+  <div class="card" :class="{'flexible': $props.size}">
     <slot></slot>
-
   </div>
 </template>
 
 <script>
 export default {
   name: 'Base Card',
+  props: {
+    size: {
+      type: String,
+      validator(prop) {
+        const acceptedSizes = ['flexible'];
+        if (acceptedSizes.indexOf(prop) !== -1) {
+          return true;
+        } else {
+          return false;
+        }
+      },
+    },
+  },
 };
 </script>
 
@@ -27,6 +39,10 @@ export default {
   transition-property: transform;
   position: relative;
   overflow: hidden;
+
+  &.flexible {
+    height: auto;
+  }
 
   &:last-child {
     margin-right: 0;

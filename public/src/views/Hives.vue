@@ -173,8 +173,8 @@ export default {
         );
         const hivesResponse = await hivesRequest.json();
         if (hivesResponse.status === 'ok') {
-          const filteredHives = hivesResponse.data.hives.sort((a, b) => a.hiveNumber - b.hiveNumber)
-          this.hives = filteredHives;
+          const sortedHives = hivesResponse.data.hives.sort((a, b) => a.hiveNumber - b.hiveNumber)
+          this.hives = sortedHives;
           this.isLoading = false;
           // console.log(this.hives);
         } else {

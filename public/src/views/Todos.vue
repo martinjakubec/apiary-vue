@@ -1,29 +1,39 @@
 <template>
   <div>
     <h1>{{ $t('locale.pageTitles.todos') }}</h1>
-    <div v-if="hasHives" class="todo-wrapper row">
-
-      <div
-        v-for="hive of hives"
-        :key="hive.hiveNumber"
-        class="single-todo-wrapper col-3"
-      >
+    <div class="card-wrapper">
+      <base-card v-for="hive of hives" :key="hive.hiveNumber" size="flexible">
         <h3>Hive n°{{ hive.hiveNumber }}</h3>
-        <div v-for="control of hive.controls" :key="control.controlCustomId">
-          
-          <p v-for="todo of control.workToDo" :key="todo.text" :class="{'done': todo.isDone}">
-            {{todo.text}}
-          </p>
-        </div>
-      </div>
+        <p>
+          Last control:
+          {{
+            new Date(
+              hive.controls[hive.controls.length - 1].dateOfControl
+            ).toLocaleDateString()
+          }}
+        </p>
+        <p>Last To Dos:</p>
+        <p v-for="todo of hive.controls[hive.controls.length - 1].workToDo" :key="todo.text">{{todo.text}}</p>
+        <router-link class="see-more-link" :to="`/hive/${hive.hiveNumber}`">
+          <base-button buttonType="ghost">
+            See more
+          </base-button>
+        </router-link>
+      </base-card>
     </div>
   </div>
 </template>
 
 <script>
+import BaseButton from '../components/base/BaseButton.vue';
+import BaseCard from '../components/base/BaseCard.vue';
 // @ is an alias to /src
 
 export default {
+  components: {
+    BaseCard,
+    BaseButton,
+  },
   name: 'Todos',
   data() {
     return {
@@ -54,8 +64,20 @@ export default {
         });
         const getTodosResponse = await getTodosRequest.json();
         if (getTodosResponse.status === 'ok') {
-          this.hives = getTodosResponse.data.hives;
-          console.log(this.hives);
+          const sortedHives = getTodosResponse.data.hives.sort(
+            (hive1, hive2) => {
+              return hive1.hiveNumber - hive2.hiveNumber;
+            }
+          );
+          sortedHives.forEach((hive) => {
+            hive.controls.sort((control1, control2) => {
+              return (
+                new Date(control1.dateOfControl) -
+                new Date(control2.dateOfControl)
+              );
+            });
+          });
+          this.hives = sortedHives;
         } else {
           this.$emit('error-emitted', getTodosResponse.error);
         }
@@ -67,14 +89,17 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 h3 {
   font-size: 2.4rem;
   font-weight: bold;
   margin-bottom: 1rem;
 }
-
-.done {
-  text-decoration: line-through;
+.card-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+}
+.see-more-link {
+  
 }
 </style>
