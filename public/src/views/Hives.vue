@@ -14,7 +14,7 @@
 
     <base-flex v-if="hasHives">
       <base-card v-for="hive of hives" :key="hive.hiveNumber">
-        <h3 class="card-title">Hive n° {{ hive.hiveNumber }}</h3>
+        <h3 class="card-title">Hive n°{{ hive.hiveNumber }}</h3>
         <div
           class="hive-color"
           :style="{'background-color': hive.hiveColor}"
@@ -246,7 +246,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .hive-color {
   height: 5px;
   width: 100%;

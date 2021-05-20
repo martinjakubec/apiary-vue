@@ -1,6 +1,6 @@
 <template>
   <div class="base-modal">
-    <div class="base-modal-wrapper">
+    <div class="base-modal-wrapper" :class="widthClass">
       <base-button
         class="button-close"
         :buttonSize="'tiny'"
@@ -14,9 +14,23 @@
 
 <script>
 import BaseButton from './BaseButton.vue';
+
+const acceptedWidthTypes = ['normal', 'flexible'];
+
 export default {
   components: {BaseButton},
   props: {
+    widthType: {
+      type: String,
+      validator(value) {
+        return acceptedWidthTypes.indexOf(value) !== -1;
+      },
+    },
+  },
+  computed: {
+    widthClass() {
+      return this.$props.widthType;
+    },
   },
   emits: ['close-modal'],
   created() {
@@ -36,7 +50,7 @@ export default {
   background-color: transparentize($lighter-gray, $amount: 0.3);
 
   &-wrapper {
-  overflow-y: scroll;
+    overflow-y: scroll;
     transform: translate(-50%, -50%);
     width: 80%;
     height: 80%;
@@ -47,13 +61,39 @@ export default {
     left: 50%;
     background-color: $dark-gray;
     padding: 20px;
+
+    &.flexible {
+      width: fit-content;
+      width: --moz-fit-content;
+      height: fit-content;
+      height: --moz-fit-content;
+      max-height: 80%;
+      padding: 5rem;
+
+      .button-close {
+        margin-bottom: 2rem;
+      }
+    }
+
+    &::-webkit-scrollbar {
+      background-color: darken($lighter-gray, 4%);
+      height: 15px;
+      border-top-right-radius: 5px;
+      border-bottom-right-radius: 5px;
+      &-thumb {
+        background-color: $lighter-gray;
+        &:hover {
+          background-color: $dark-yellow;
+        }
+      }
+    }
   }
 
   .button-close {
     position: sticky;
     top: 10px;
     left: 100%;
-    margin-bottom: -200%;
+    margin-bottom: -100%;
 
     &::before,
     &::after {

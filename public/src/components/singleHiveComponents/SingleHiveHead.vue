@@ -43,4 +43,39 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+h1 {
+  margin-bottom: 2rem;
+}
+
+.link-back {
+  font-size: 1.4rem;
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  &::before {
+    content: '';
+    background: url('../../assets/img/cil-arrow-circle-left.svg');
+    display: inline-block;
+    height: 1.6em;
+    margin-right: 0.8em;
+    aspect-ratio: 1 / 1;
+    transition-property: transform;
+    transition-duration: 0.2s;
+  }
+
+  &:hover {
+    &::before {
+      transform: translateX(-0.8em);
+      transition-property: transform;
+      transition-duration: 0.2s;
+    }
+  }
+}
+
+h2 {
+  font-size: 2.5rem !important;
+  margin-bottom: 20px !important;
+  margin-left: 20px !important;
+  font-style: italic !important;
+}
 </style>

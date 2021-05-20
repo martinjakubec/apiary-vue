@@ -6,7 +6,7 @@
 
 <script>
 const acceptedTypes = ['ghost', 'full', 'danger'];
-const acceptedSizes = ['normal', 'square-small', 'square-big', 'tiny', 'small'];
+const acceptedSizes = ['normal', 'square-small', 'square-big', 'tiny', 'small', 'medium'];
 
 export default {
   props: {
@@ -114,6 +114,15 @@ export default {
     font-size: 1.4rem;
     min-height: 30px;
     max-height: 30px;
+    padding: 0 5px;
+    margin: 0;
+  }
+  &.medium {
+    min-width: 90px;
+    max-width: 120px;
+    font-size: 1.5rem;
+    min-height: 40px;
+    max-height: 40px;
     padding: 0 5px;
     margin: 0;
   }

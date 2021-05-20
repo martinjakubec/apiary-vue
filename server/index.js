@@ -26,6 +26,16 @@ const app = express();
 
 const helmetDirectives = require('./config/helmetConfig');
 
+const MODE = process.env.MODE;
+if (MODE === 'production') {
+  const helmetDirectives = require('./helmet-setup/directives');
+  app.use(helmet(helmetDirectives));
+} else if (MODE === 'dev') {
+  app.use(helmet());
+} else {
+  app.use(helmet());
+}
+
 app.use(helmet(helmetDirectives));
 app.use(cors());
 
@@ -34,7 +44,6 @@ app.use(express.json());
 
 const verifyUser = require('./middleware/verifyUser');
 app.use(verifyUser);
-
 
 // routers
 const HiveRouter = require('./routers/HiveRouter');
