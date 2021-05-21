@@ -24,15 +24,8 @@ const db = mongoose.connect(
 
 const app = express();
 
-const MODE = process.env.MODE;
-if (MODE === 'production') {
-  const helmetDirectives = require('./config/helmetConfig');
-  app.use(helmet(helmetDirectives));
-} else if (MODE === 'dev') {
-  app.use(helmet());
-} else {
-  app.use(helmet());
-}
+const helmetDirectives = require('./config/helmetConfig');
+app.use(helmet(helmetDirectives));
 
 app.use(cors());
 
@@ -58,5 +51,7 @@ app.get('/bzzz', (req, res, next) => {
 });
 
 app.use('/', express.static(path.join(__dirname, '..', 'public', 'dist')));
-
+app.get('*', (req, res, next) => {
+  res.sendFile(path.join(__dirname, '..', 'public', 'dist', 'index.html'))
+});
 app.listen(process.env.PORT);
