@@ -1,7 +1,7 @@
 <template>
   <div>
-    <h1>404</h1>
-    <p>Wrong page, bzzzz...</p>
+    <h1>Warnings</h1>
+    
   </div>
 </template>
 
@@ -9,7 +9,7 @@
 // @ is an alias to /src
 
 export default {
-  name: '404',
+  name: 'Warnings',
 }
 </script>
 

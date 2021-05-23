@@ -7,6 +7,7 @@
       :id="id"
       :name="name"
       :required="isRequired"
+      :maxlength="$props.maxLength"
     />
   </div>
 </template>
@@ -18,6 +19,7 @@ export default {
     id: {type: String, required: true},
     name: {type: String, required: true},
     isRequired: {type: Boolean},
+    maxLength: {type: Number},
     defaultValue: {type: String}
   },
   data() {

@@ -2,12 +2,12 @@
   <div>
     <h1>{{ $t('locale.pageTitles.todos') }}</h1>
     <div class="card-wrapper">
-    <hive-wrapper
-      v-for="hive of hives"
-      :key="hive.hiveNumber"
-      :hive="hive"
-      @update-todos="fetchTodos"
-    />
+      <hive-wrapper
+        v-for="hive of hives"
+        :key="hive.hiveNumber"
+        :hive="hive"
+        @update-todos="fetchTodos"
+      />
     </div>
   </div>
 </template>

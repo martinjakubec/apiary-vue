@@ -8,17 +8,23 @@
       <h2 v-if="hiveData.hiveDescription">
         {{ hiveData.hiveDescription }}
       </h2>
+      <div class="left-col">
       <information-view v-if="!isInEditMode" :hiveData="hiveData" @open-edit="openEditMode"></information-view>
       <edit-view v-else :hiveData="hiveData" @close-edit="closeEditMode" @error="$emit('error-emitted')" @update-hives="$emit('update-hive')"></edit-view>
+      </div>
+      <div class="right-col">
+        <hive-table />
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import EditView from './EditView.vue';
+import HiveTable from './HiveTable.vue';
 import InformationView from './InformationView.vue';
 export default {
-  components: {InformationView, EditView},
+  components: {InformationView, EditView, HiveTable},
   props: {
     hiveData: {
       type: Object,
@@ -77,5 +83,18 @@ h2 {
   margin-bottom: 20px !important;
   margin-left: 20px !important;
   font-style: italic !important;
+}
+
+.left-col, .right-col {
+  vertical-align: top;
+  display: inline-block;
+  width: 50%;
+  box-sizing: border-box;
+  border: 1px solid green;
+  min-height: 100px;
+
+  @include media-breakpoint-down(lg) {
+    width: 100%;
+  }
 }
 </style>

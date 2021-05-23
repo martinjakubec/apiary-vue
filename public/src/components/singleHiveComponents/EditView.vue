@@ -6,12 +6,14 @@
         :name="'overalState'"
         :label="'Overal state'"
         :defaultValue="hiveData.overalState"
+        :maxLength="100"
       />
       <input-text
         :id="'hiveDescription'"
         :name="'hiveDescription'"
         :label="'Hive description'"
         :defaultValue="hiveData.hiveDescription"
+        :maxLength="100"
       />
       <input-number
         :id="'totalNumberOfFrames'"
@@ -31,6 +33,7 @@
         :name="'queenBreed'"
         :label="'Queen breed'"
         :defaultValue="hiveData.queenBreed"
+        :maxLength="100"
       />
       <input-number
         :id="'queenNumber'"
@@ -65,6 +68,7 @@
         :label="'Number of honey supers'"
         :min="0"
         :max="7"
+        :defaultValue="String(hiveData.honeySuper)"
       />
     </form>
     <div class="button-wrapper">

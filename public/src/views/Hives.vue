@@ -45,6 +45,7 @@
           :id="'hiveDescription'"
           :name="'hiveDescription'"
           :label="'Hive description'"
+          :maxLength="100"
         />
         <input-number
           :id="'totalNumberOfFrames'"
@@ -62,6 +63,7 @@
           :id="'queenBreed'"
           :name="'queenBreed'"
           :label="'Queen breed'"
+          :maxLength="100"
         />
         <input-number
           :id="'queenNumber'"
