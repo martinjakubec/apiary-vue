@@ -11,14 +11,17 @@ router.get('/user', async (req, res, next) => {
     const token = req.headers.authorization;
     const username = jwt.decode(token).username;
     try {
-      const userToFind = await UserModel.findOne({username: username}, {})
-
-    } catch(err) {
+      const userToFind = await UserModel.findOne({username: username}, {
+        username: 1,
+        temperature: 1
+      });
+      return res.send({status: 'ok', data: userToFind});
+    } catch (err) {
       console.log(err);
+      return res.send({status: 'error', error: err})
     }
-    res.send({status: 'ok', data: 'data'})
   } else {
-    res.send({status: 'error', error: 'please login to access this feature'})
+    return res.send({status: 'error', error: 'please login to access this feature'}); // 01101
   }
 });
 
@@ -36,11 +39,11 @@ router.post('/register', async (req, res, next) => {
         email,
       });
       if (addUserToDb) {
-        return res.send({status: 'ok', data: 'User successfully registered.'});
+        return res.send({status: 'ok', data: 'User successfully registered.'}); // 11001
       } else {
         return res.send({
           status: 'error',
-          error: 'Something went terribly wrong, please, try again later.',
+          error: 'Something went terribly wrong, please, try again later.', // 01102
         });
       }
     } catch (err) {
@@ -48,25 +51,25 @@ router.post('/register', async (req, res, next) => {
         if (err.keyPattern?.username) {
           return res.send({
             status: 'error',
-            error: 'Username is already taken',
+            error: 'Username is already taken', // 01002
           });
         }
         if (err.keyPattern?.email) {
           return res.send({
             status: 'error',
-            error: 'An account with this email is already registered.',
+            error: 'An account with this email is already registered.', // 01003
           });
         }
       }
       return res.send({
         status: 'error',
-        error: 'Something went terribly wrong',
+        error: 'Something went terribly wrong', // 01008
       });
     }
   } else {
     return res.send({
       status: 'error',
-      error: 'Username is not a valid option.',
+      error: 'Username is not a valid option.', // 01004
     });
   }
 });
@@ -90,7 +93,7 @@ router.post('/login', async (req, res, next) => {
         );
         return res.send({status: 'ok', data: token});
       } else {
-        return res.send({status: 'error', error: 'wrong password'});
+        return res.send({status: 'error', error: 'wrong password'}); // 0100
       }
     } else {
       return res.send({status: 'error', error: 'user does not exist'});
@@ -106,26 +109,27 @@ router.post('/login', async (req, res, next) => {
 
 router.post('/deleteuser', async (req, res, next) => {
   // MEH MEH MEH
-  return res.send({status: 'critical error', error: 'stop trying to delete a user while testing your API, seriously.'})
+  return res.send({
+    status: 'critical error',
+    error: 'stop trying to delete a user while testing your API, seriously.',
+  });
   const isUserLoggedIn = res.locals.isUserLoggedIn;
   if (isUserLoggedIn) {
     const username = res.locals.username;
     try {
       const userFromDb = await UserModel.findOneAndDelete(
         {username: username},
-        {username: 1, password: 1}
+        {username: 1}
       );
-      console.log(userFromDb);
       if (userFromDb) {
         return res.send({
           status: 'ok',
-          data: `user ${username} successfully deleted`,
+          data: `User ${username} successfully deleted`,
         });
       } else {
         return res.send({
           status: 'error',
-          data:
-            'the account you are trying to delete does not exist. contact the admin to resolve this problem.',
+          data: 'the account you are trying to delete does not exist. contact the admin to resolve this problem.',
         });
       }
     } catch (err) {
