@@ -90,7 +90,6 @@ h2 {
   display: inline-block;
   width: 50%;
   box-sizing: border-box;
-  border: 1px solid green;
   min-height: 100px;
 
   @include media-breakpoint-down(lg) {

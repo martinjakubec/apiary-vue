@@ -19,6 +19,5 @@ canvas {
   right: 0;
   height: 300px;
   width: 500px;
-  border: 1px solid red;
 }
 </style>
