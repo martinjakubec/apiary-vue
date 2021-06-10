@@ -25,9 +25,19 @@ export default {
       this.isErrorVisible = false;
     },
   },
+  props: {
+    isUserLoggedIn: {
+      type: Boolean,
+    },
+  },
+  created() {
+    if(!this.$props.isUserLoggedIn) {
+      this.$router.push('/login')
+    }
+  }
 };
 </script>
 
 <style lang="scss" scoped>
-//
+
 </style>

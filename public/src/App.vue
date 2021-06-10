@@ -126,7 +126,7 @@ export default {
       this.isUserLoggedIn = false;
       this.userData = null;
       localStorage.removeItem('token');
-      this.$router.push('/')
+      this.$router.push('/login')
     },
   },
 };

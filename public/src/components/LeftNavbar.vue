@@ -3,17 +3,17 @@
     <router-link class="left-navbar-link" to="/">{{$t('locale.pageTitles.home')}}</router-link>
     <router-link v-if="isUserLoggedIn" class="left-navbar-link" to="/hives">{{$t('locale.pageTitles.hives')}}</router-link>
     <router-link v-if="isUserLoggedIn" class="left-navbar-link space-after" to="/todos">{{$t('locale.pageTitles.todos')}}</router-link>
-    <router-link v-if="isUserLoggedIn" class="left-navbar-link" to="/profile">{{$t('locale.pageTitles.profile')}}</router-link>
-    <router-link class="left-navbar-link" to="/manual">{{$t('locale.pageTitles.manual')}}</router-link>
-    <locale-switcher class="locale-switcher"></locale-switcher>
+    <!-- <router-link v-if="isUserLoggedIn" class="left-navbar-link" to="/profile">{{$t('locale.pageTitles.profile')}}</router-link>
+    <router-link class="left-navbar-link" to="/manual">{{$t('locale.pageTitles.manual')}}</router-link> -->
+    <!-- <locale-switcher class="locale-switcher"></locale-switcher> -->
   </nav>
 </template>
 
 <script>
-import LocaleSwitcher from './LocaleSwitcher';
+// import LocaleSwitcher from './LocaleSwitcher';
 export default {
   components: {
-    LocaleSwitcher,
+    // LocaleSwitcher,
   },
   props: {
     isUserLoggedIn: Boolean
