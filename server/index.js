@@ -51,6 +51,9 @@ app.get('/bzzz', (req, res, next) => {
 });
 
 app.use('/', express.static(path.join(__dirname, '..', 'public', 'dist')));
+app.use('/demo/*', (req, res, next) => {
+  res.sendFile(path.join(__dirname, '..', 'public', 'dist', 'demo', 'index.html'))
+})
 app.get('*', (req, res, next) => {
   res.sendFile(path.join(__dirname, '..', 'public', 'dist', 'index.html'))
 });
