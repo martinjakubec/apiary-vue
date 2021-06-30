@@ -6,6 +6,7 @@ module.exports = {
       scriptSrc: ["'self'", "'unsafe-eval'"],
       styleSrc: ["*"],
       fontSrc: ["*"],
+      connectSrc: ["*"]
       // baseUri: ['self'],
       // blockAllMixedContent: [],
       // frameAncestors: ['self'],
