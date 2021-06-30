@@ -43,6 +43,7 @@ export default {
     };
   },
   async created() {
+    this.handleUserLogin()
     const token = localStorage.getItem('token');
     if (token) {
       const [, payload] = token.split('.');
@@ -87,9 +88,9 @@ export default {
       const userDataResponse = await userDataRequest.json();
       this.userData = userDataResponse;
     },
-    async handleUserLogin(e) {
-      const username = e.target.username.value.trim();
-      const password = e.target.password.value.trim();
+    async handleUserLogin() {
+      const username = 'demo';
+      const password = 'demoapp';
       try {
         if (username && password) {
           const loginBody = JSON.stringify({username, password});

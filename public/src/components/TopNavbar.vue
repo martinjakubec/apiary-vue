@@ -1,15 +1,6 @@
 <template>
   <nav class="topnav">
     <router-link to="/" class="topnav-logo">{{ appName }}</router-link>
-    <router-link v-if="!isUserLoggedIn" to="/register" class="topnav-link">{{
-      $t('locale.pageTitles.register')
-    }}</router-link>
-    <router-link v-if="!isUserLoggedIn" to="/login" class="topnav-link">{{
-      $t('locale.pageTitles.login')
-    }}</router-link>
-    <a v-if="isUserLoggedIn" class="topnav-link" @click="$emit('user-logout')">{{
-      $t('locale.pageTitles.logout')
-    }}</a>
   </nav>
 </template>
 

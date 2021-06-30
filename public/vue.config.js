@@ -1,5 +1,5 @@
 module.exports = {
-  // publicPath:
+  publicPath: '/demo',
   //   process.env.NODE_ENV === 'production' ? '/apiary/' : '/',
   css: {
     loaderOptions: {
