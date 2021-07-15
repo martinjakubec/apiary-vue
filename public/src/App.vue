@@ -43,30 +43,32 @@ export default {
     };
   },
   async created() {
-    this.handleUserLogin()
     const token = localStorage.getItem('token');
     if (token) {
-      const [, payload] = token.split('.');
-      const username = JSON.parse(atob(payload)).username;
-      const verifyToken = await fetch(
-        process.env.VUE_APP_API_URL + '/validateToken',
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            Accept: 'application/json',
-          },
-          body: JSON.stringify({token}),
-        }
-      );
-      const verifyTokenResponse = await verifyToken.json();
-      if (verifyTokenResponse.status === 'ok') {
-        this.isUserLoggedIn = true;
-        this.fetchUserData(token, username);
-      } else {
-        this.errorMessage = verifyTokenResponse.error;
-        this.handleUserLogout();
-      }
+      this.handleUserLogin();
+      //   const [, payload] = token.split('.');
+      //   const username = JSON.parse(atob(payload)).username;
+      //   const verifyToken = await fetch(
+      //     process.env.VUE_APP_API_URL + '/validateToken',
+      //     {
+      //       method: 'POST',
+      //       headers: {
+      //         'Content-Type': 'application/json',
+      //         Accept: 'application/json',
+      //       },
+      //       body: JSON.stringify({token}),
+      //     }
+      //   );
+      //   const verifyTokenResponse = await verifyToken.json();
+      //   if (verifyTokenResponse.status === 'ok') {
+      //     this.isUserLoggedIn = true;
+      //     this.fetchUserData(token, username);
+      //   } else {
+      //     this.errorMessage = verifyTokenResponse.error;
+      //     this.handleUserLogout();
+      //   }
+    } else {
+      this.handleUserLogin();
     }
   },
   methods: {
@@ -91,6 +93,7 @@ export default {
     async handleUserLogin() {
       const username = 'demo';
       const password = 'demoapp';
+      console.log('handling user login');
       try {
         if (username && password) {
           const loginBody = JSON.stringify({username, password});
@@ -127,7 +130,7 @@ export default {
       this.isUserLoggedIn = false;
       this.userData = null;
       localStorage.removeItem('token');
-      this.$router.push('/login')
+      this.$router.push('/login');
     },
   },
 };
