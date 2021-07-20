@@ -2,7 +2,7 @@
   <div class="error-modal">
     <p>{{$t('errorMessages.errorTitle')}}</p>
     <slot></slot>
-    <base-button @button-clicked="$emit('close-error')">Close</base-button>
+    <base-button @button-clicked="$emit('close-error')" ref="closeButton">Close</base-button>
   </div>
 </template>
 
@@ -10,7 +10,14 @@
 import BaseButton from './BaseButton.vue'
 export default {
   components: { BaseButton },
-  emits: ['close-error']
+  emits: ['close-error'],
+  mounted() {
+    console.log('error coming in');
+    console.log(this.$refs.closeButton.focus());
+  },
+  unmounted() {
+    console.log('error going away');
+  },
 }
 </script>
 

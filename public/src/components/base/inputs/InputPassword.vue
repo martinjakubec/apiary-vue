@@ -53,6 +53,7 @@ export default {
     left: 10px;
     transform: translateY(-50%);
     display: block;
+    cursor: text;
 
     &.has-value {
       top: -25%;
