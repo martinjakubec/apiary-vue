@@ -205,7 +205,6 @@ export default {
         ? new Date(e.target.dateAdded.value)
         : '';
 
-      console.log(e.target.dateAdded.value);
 
       const requestBody = {
         hiveNumber,
@@ -249,7 +248,7 @@ export default {
     if (this.isUserLoggedIn) {
       this.fetchHives();
     } else {
-      this.$router.push('/');
+      this.$router.push('/login');
     }
   },
 };
