@@ -6,9 +6,27 @@
     <td>{{ $props.control.numberOfFrames }}</td>
     <td>{{ $props.control.numberOfFullFrames }}</td>
     <td>{{ $props.control.numberOfFramesWithSealedBrood }}</td>
-    <td>{{ $props.control.unsealedBrood == true ? 'yes' : 'no' }}</td>
-    <td>{{ $props.control.queenSpotted == true ? 'yes' : 'no' }}</td>
-    <td>{{ $props.control.freshEggs == true ? 'yes' : 'no' }}</td>
+    <td>
+      {{
+        $props.control.unsealedBrood == true
+          ? $t('locale.controls.yes')
+          : $t('locale.controls.no')
+      }}
+    </td>
+    <td>
+      {{
+        $props.control.queenSpotted == true
+          ? $t('locale.controls.yes')
+          : $t('locale.controls.no')
+      }}
+    </td>
+    <td>
+      {{
+        $props.control.freshEggs == true
+          ? $t('locale.controls.yes')
+          : $t('locale.controls.no')
+      }}
+    </td>
     <td>{{ $props.control.weather }}</td>
     <td>{{ $props.control.temperature }}°C</td>
     <td>{{ $props.control.hostility }}</td>
@@ -19,14 +37,18 @@
       </span>
     </td>
     <td class="wide-cell">
-      <span v-for="workToDo of $props.control.workToDo" :key="workToDo.text" :class="{'done': workToDo.isDone}">
+      <span
+        v-for="workToDo of $props.control.workToDo"
+        :key="workToDo.text"
+        :class="{done: workToDo.isDone}"
+      >
         - {{ workToDo.text }}
         <br />
       </span>
     </td>
     <td>
       <base-button @click="openModal" buttonType="ghost" buttonSize="small"
-        >Edit</base-button
+        >{{$t('locale.controls.edit')}}</base-button
       >
     </td>
     <td>
@@ -34,7 +56,7 @@
         @click="handleDeleteControl"
         buttonType="danger"
         buttonSize="small"
-        >Delete</base-button
+        >{{$t('locale.controls.delete')}}</base-button
       >
     </td>
   </tr>
@@ -42,7 +64,7 @@
     <base-form @submit.prevent="handleEditControl">
       <input-date
         :id="'dateOfControl'"
-        :label="'Date of control'"
+        :label="$t('locale.controls.dateOfControl')"
         :name="'dateOfControl'"
         :defaultValue="
           $props.control.dateOfControl
@@ -53,91 +75,91 @@
       <input-number
         name="numberOfFrames"
         id="numberOfFrames"
-        label="Number of frames"
+        :label="$t('locale.controls.numberOfFrames')"
         :min="1"
         :defaultValue="String($props.control.numberOfFrames)"
       />
       <input-number
         name="numberOfFullFrames"
         id="numberOfFullFrames"
-        label="Number of full frames"
+        :label="$t('locale.controls.numberOfFullFrames')"
         :min="1"
         :defaultValue="String($props.control.numberOfFullFrames)"
       />
       <input-number
         name="numberOfFramesWithSealedBrood"
         id="numberOfFramesWithSealedBrood"
-        label="NOF with sealed brood"
+        :label="$t('locale.controls.numberOfFramesWithSealedBrood')"
         :min="1"
         :defaultValue="String($props.control.numberOfFramesWithSealedBrood)"
       />
-      <input-radio-wrapper label="Unsealed brood">
+      <input-radio-wrapper :label="$t('locale.controls.unsealedBrood.label')">
         <input-radio
           id="unsealedBroodTrue"
           name="unsealedBrood"
-          label="True"
+          :label="$t('locale.controls.unsealedBrood.true')"
           :value="true"
           :checked="$props.control.unsealedBrood ? true : false"
         />
         <input-radio
           id="unsealedBroodFalse"
           name="unsealedBrood"
-          label="False"
+          :label="$t('locale.controls.unsealedBrood.false')"
           :value="false"
           :checked="!$props.control.unsealedBrood ? true : false"
         />
       </input-radio-wrapper>
-      <input-radio-wrapper label="Queen spotted">
+      <input-radio-wrapper :label="$t('locale.controls.queenSpotted.label')">
         <input-radio
           id="queenSpottedTrue"
           name="queenSpotted"
-          label="True"
+          :label="$t('locale.controls.unsealedBrood.true')"
           :value="true"
           :checked="$props.control.queenSpotted ? true : false"
         />
         <input-radio
           id="queenSpottedFalse"
           name="queenSpotted"
-          label="False"
+          :label="$t('locale.controls.unsealedBrood.false')"
           :value="false"
           :checked="!$props.control.queenSpotted ? true : false"
         />
       </input-radio-wrapper>
-      <input-radio-wrapper label="Fresh eggs">
+      <input-radio-wrapper :label="$t('locale.controls.freshEggs.label')">
         <input-radio
           id="freshEggsTrue"
           name="freshEggs"
-          label="True"
+          :label="$t('locale.controls.freshEggs.true')"
           :value="true"
           :checked="$props.control.freshEggs ? true : false"
         />
         <input-radio
           id="freshEggsFalse"
           name="freshEggs"
-          label="False"
+          :label="$t('locale.controls.freshEggs.false')"
           :value="false"
           :checked="!$props.control.freshEggs ? true : false"
         />
       </input-radio-wrapper>
       <input-select
         :options="[
-          {name: 'Sunny/Clear', value: 'sunny'},
-          {name: 'parially cloudy', value: 'partiallyCloudy'},
-          {name: 'Overcast', value: 'overcast'},
-          {name: 'Rain', value: 'rain'},
-          {name: 'Drizzle', value: 'drizzle'},
-          {name: 'Snow', value: 'snow'},
-          {name: 'Before storm', value: 'beforeStorm'},
-          {name: 'Stormy', value: 'stormy'},
+          {name: $t('locale.controls.weather.sunny'), value: 'sunny'},
+          {name: $t('locale.controls.weather.partiallyCloudy'), value: 'partiallyCloudy'},
+          {name: $t('locale.controls.weather.overcast'), value: 'overcast'},
+          {name: $t('locale.controls.weather.rain'), value: 'rain'},
+          {name: $t('locale.controls.weather.drizzle'), value: 'drizzle'},
+          {name: $t('locale.controls.weather.snow'), value: 'snow'},
+          {name: $t('locale.controls.weather.beforeStorm'), value: 'beforeStorm'},
+          {name: $t('locale.controls.weather.stormy'), value: 'stormy'},
         ]"
         name="weather"
         id="weather"
-        label="Weather"
+        :label="$t('locale.controls.weather.label')"
         :defaultValue="$props.control.weather"
       />
       <input-number
         name="temperature"
-        label="Temperature"
+        :label="$t('locale.controls.temperature')"
         id="temperature"
         :min="-100"
         :max="100"
@@ -148,16 +170,16 @@
         id="hostility"
         :min="0"
         :max="10"
-        label="Hostility"
+        :label="$t('locale.controls.hostility')"
         :defaultValue="String($props.control.hostility)"
       />
       <controls-todo :defaultValue="$props.control.workDone" ref="workDone"
-        >Work done</controls-todo
+        >{{$t('locale.controls.workDone')}}</controls-todo
       >
       <controls-todo :defaultValue="workToDoArr" ref="workToDo"
-        >Work to do</controls-todo
+        >{{$t('locale.controls.workToDo')}}</controls-todo
       >
-      <base-button>Apply changes</base-button>
+      <base-button>{{$t('locale.controls.applyChanges')}}</base-button>
     </base-form>
   </base-modal>
 </template>
@@ -252,7 +274,9 @@ export default {
 
           const dateOfControl = new Date(e.target.dateOfControl.value);
           const numberOfFrames = parseInt(e.target.numberOfFrames.value);
-          const numberOfFullFrames = parseInt(e.target.numberOfFullFrames.value);
+          const numberOfFullFrames = parseInt(
+            e.target.numberOfFullFrames.value
+          );
           const numberOfFramesWithSealedBrood = parseInt(
             e.target.numberOfFramesWithSealedBrood.value
           );

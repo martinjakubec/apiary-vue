@@ -80,7 +80,7 @@ router.post('/hive/:hiveNumber/updatetodo', async (req, res, next) => {
   if (isUserLoggedIn) {
     try {
       const username = res.locals.username;
-      const {todoCustomId, toDoValue} = req.body;
+      const {_id, toDoValue} = req.body;
       const toDoToUpdate = await UserModel.findOneAndUpdate(
         {
           username: username,
@@ -94,7 +94,7 @@ router.post('/hive/:hiveNumber/updatetodo', async (req, res, next) => {
         {
           arrayFilters: [
             {'hive.hiveNumber': hiveNumber},
-            {'todo.todoCustomId': todoCustomId},
+            {'todo._id': _id},
           ],
         }
       );

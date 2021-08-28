@@ -10,7 +10,7 @@
       @update-hive="fetchHiveData"
     ></controls-list>
     <base-button :buttonType="'danger'" @click="deleteHive"
-      >Delete hive</base-button
+      >{{ $t('locale.pages.SingleHive.deleteHive') }}</base-button
     >
   </div>
 </template>
@@ -64,7 +64,7 @@ export default {
     },
     async deleteHive() {
       const verificationNumber = prompt(
-        'You are about to delete this hive permanently. Write the hive number to confirm this.'
+        this.$t('locale.pages.SingleHive.deleteHivePrompt')
       );
       if (verificationNumber === null) {
         return;

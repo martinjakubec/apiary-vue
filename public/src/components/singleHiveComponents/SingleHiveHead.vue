@@ -1,7 +1,7 @@
 <template>
   <div class="single-hive-head">
     <div class="data-column">
-      <router-link to="/hives" class="link-back">Back to all hives</router-link>
+      <router-link to="/hives" class="link-back">{{$t('locale.pages.SingleHive.backToAllHives')}}</router-link>
       <h1>
         {{ $t('locale.pageTitles.singleHive', {hiveNumber: $route.params.id}) }}
       </h1>

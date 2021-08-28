@@ -18,7 +18,7 @@
         $t('locale.input.login')
       }}</base-button>
       <p class="register-prompt">
-        No account yet? <router-link to="/register">Register!</router-link>
+        {{$t('locale.pages.Login.noAccountPrompt')}} <router-link class="register-link" to="/register">{{$t('locale.pages.Login.registerPrompt')}}</router-link>
       </p>
     </form>
   </div>
@@ -53,5 +53,9 @@ h1 {
 
 .register-prompt {
   margin-top: 2rem;
+}
+
+.register-link {
+  color: $dark-yellow;
 }
 </style>

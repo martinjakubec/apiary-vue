@@ -1,19 +1,28 @@
 <template>
   <div>
+    <base-error v-if="isErrorVisible" @close-error="closeError"> </base-error>
     <h1>{{ $t('locale.pageTitles.home') }}</h1>
-    <base-error v-if="isErrorVisible" @close-error="closeError">
-    </base-error>
+    <base-row>
+      <hive-overview></hive-overview>
+      <todo-overview></todo-overview>
+    </base-row>
   </div>
 </template>
 
 <script>
 import BaseError from '../components/base/BaseError.vue';
+import BaseRow from '../components/base/BaseRow.vue';
+import HiveOverview from '../components/homeComponents/HiveOverview.vue';
+import TodoOverview from '../components/homeComponents/TodoOverview.vue';
 // @ is an alias to /src
 
 export default {
   name: 'Home',
   components: {
     BaseError,
+    BaseRow,
+    HiveOverview,
+    TodoOverview
   },
   data() {
     return {
@@ -30,14 +39,12 @@ export default {
       type: Boolean,
     },
   },
-  created() {
-    if(!this.$props.isUserLoggedIn) {
-      this.$router.push('/login')
+  async created() {
+    if (!this.isUserLoggedIn) {
+      this.$router.push('/login');
     }
-  }
+  },
 };
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

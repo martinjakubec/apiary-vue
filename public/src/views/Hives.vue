@@ -1,20 +1,26 @@
 <template>
   <div>
     <h1>{{ $t('locale.pageTitles.hives') }}</h1>
-    <p v-if="isLoading">Loading...</p>
+    <p v-if="isLoading">{{ $t('locale.pages.Hives.loadingText') }}</p>
     <p v-else-if="!hasHives">
-      You don't seem to have any hives, feel free to add your first one!
+      {{ $t('locale.pages.Hives.addHivesPrompt') }}
     </p>
     <base-button
       :buttonSize="'normal'"
       :buttonType="'ghost'"
       @button-clicked="openModal"
-      >Add hive</base-button
+      >{{ $t('locale.pages.Hives.addHive') }}</base-button
     >
 
     <base-flex v-if="hasHives">
       <base-card v-for="hive of hives" :key="hive.hiveNumber">
-        <h3 class="card-title">Hive n°{{ hive.hiveNumber }}</h3>
+        <h3 class="card-title">
+          {{
+            $t('locale.pages.Hives.hiveWithNumber', {
+              hiveNumber: hive.hiveNumber,
+            })
+          }}
+        </h3>
         <div
           class="hive-color"
           :style="{'background-color': hive.hiveColor}"
@@ -24,81 +30,80 @@
           :to="{name: 'Hive', params: {id: hive.hiveNumber}}"
           class="see-more-link"
         >
-          <base-button :buttonSize="'normal'" :buttonType="'ghost'" >See more</base-button>
+          <base-button :buttonSize="'normal'" :buttonType="'ghost'"
+            >{{$t('locale.pages.Hives.seeMore')}}</base-button
+          >
         </router-link>
       </base-card>
     </base-flex>
 
-    <base-modal
-      v-if="isModalVisible"
-      @close-modal="isModalVisible = false"
-    >
+    <base-modal v-if="isModalVisible" @close-modal="isModalVisible = false">
       <base-form :isFullWidth="true" @submit.prevent="handleAddHive">
         <input-number
           :id="'hiveNumber'"
           :name="'hiveNumber'"
-          :label="'Hive number'"
+          :label="$t('locale.pages.SingleHive.hiveNumber')"
           :min="0"
           :isRequired="true"
         />
         <input-text
           :id="'hiveDescription'"
           :name="'hiveDescription'"
-          :label="'Hive description'"
+          :label="$t('locale.pages.SingleHive.hiveDescription')"
           :maxLength="100"
         />
         <input-number
           :id="'totalNumberOfFrames'"
           :name="'totalNumberOfFrames'"
-          :label="'Total number of frames'"
+          :label="$t('locale.pages.SingleHive.totalNumberOfFrames')"
           :isRequired="true"
         />
         <input-color
           :id="'hiveColor'"
           :name="'hiveColor'"
-          :label="'Hive color'"
+          :label="$t('locale.pages.SingleHive.hiveColor')"
           ref="hiveColor"
         />
         <input-text
           :id="'queenBreed'"
           :name="'queenBreed'"
-          :label="'Queen breed'"
+          :label="$t('locale.pages.SingleHive.queenBreed')"
           :maxLength="100"
         />
         <input-number
           :id="'queenNumber'"
           :name="'queenNumber'"
-          :label="'Queen number'"
+          :label="$t('locale.pages.SingleHive.queenNumber')"
           :min="1"
           :max="100"
         />
         <input-select
           :id="'queenColor'"
           :name="'queenColor'"
-          :label="'Queen color'"
+          :label="$t('locale.pages.SingleHive.queenColor.label')"
           :options="[
-            {value: 'white', name: 'White'},
-            {value: 'yellow', name: 'Yellow'},
-            {value: 'red', name: 'Red'},
-            {value: 'green', name: 'Green'},
-            {value: 'blue', name: 'Blue'},
-            {value: 'N/A', name: 'Not marked', isDefault: true},
+            {value: 'white', name: $t('locale.pages.SingleHive.queenColor.white')},
+            {value: 'yellow', name: $t('locale.pages.SingleHive.queenColor.yellow')},
+            {value: 'red', name: $t('locale.pages.SingleHive.queenColor.red')},
+            {value: 'green', name: $t('locale.pages.SingleHive.queenColor.green')},
+            {value: 'blue', name: $t('locale.pages.SingleHive.queenColor.blue')},
+            {value: 'N/A', name: $t('locale.pages.SingleHive.queenColor.NA'), isDefault: true},
           ]"
         />
         <input-date
           :id="'dateAdded'"
           :name="'dateAdded'"
-          :label="'Date added'"
+          :label="$t('locale.pages.SingleHive.dateAdded')"
           :isRequired="true"
         />
         <input-number
           :id="'honeySuper'"
           :name="'honeySuper'"
-          :label="'Number of honey supers'"
+          :label="$t('locale.pages.SingleHive.honeySuper')"
           :min="0"
           :max="7"
         />
-        <base-button>Submit</base-button>
+        <base-button>{{$t('locale.pages.SingleHive.submit')}}</base-button>
       </base-form>
     </base-modal>
   </div>
@@ -175,7 +180,9 @@ export default {
         );
         const hivesResponse = await hivesRequest.json();
         if (hivesResponse.status === 'ok') {
-          const sortedHives = hivesResponse.data.hives.sort((a, b) => a.hiveNumber - b.hiveNumber)
+          const sortedHives = hivesResponse.data.hives.sort(
+            (a, b) => a.hiveNumber - b.hiveNumber
+          );
           this.hives = sortedHives;
           this.isLoading = false;
           // console.log(this.hives);

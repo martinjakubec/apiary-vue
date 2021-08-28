@@ -4,14 +4,14 @@
     class="todo-card"
     v-if="$props.hive.controls.length"
   >
-    <h3>Hive n°{{ $props.hive.hiveNumber }}</h3>
+    <h3>{{$t('locale.controls.todos.hiveNumberTitle', {hiveNumber: $props.hive.hiveNumber})}}</h3>
     <to-do-wrapper :dateOfControl="recentControl.dateOfControl">
       <to-do
         v-for="todo of recentControl.workToDo"
-        :key="todo.todoCustomId"
+        :key="todo._id"
         :text="todo.text"
         :isDone="todo.isDone"
-        :id="todo.todoCustomId"
+        :id="todo._id"
         :hiveNumber="$props.hive.hiveNumber"
       ></to-do>
       <base-button

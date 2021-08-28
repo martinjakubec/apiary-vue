@@ -1,8 +1,8 @@
 <template>
   <div>
-    <h3>Controls</h3>
+    <h3>{{ $t('locale.controls.controlsTitle') }}</h3>
     <base-button :buttonType="'ghost'" @click="openModal"
-      >Add control</base-button
+      >{{ $t('locale.controls.addControl') }}</base-button
     >
     <controls-table
       v-if="hasControls"
@@ -14,87 +14,87 @@
       <base-form @submit.prevent="handleAddControl">
         <input-date
           :id="'dateOfControl'"
-          :label="'Date of control'"
+          :label="$t('locale.controls.dateOfControl')"
           :name="'dateOfControl'"
         />
         <input-number
           name="numberOfFrames"
           id="numberOfFrames"
-          label="Number of frames"
+          :label="$t('locale.controls.numberOfFrames')"
           :min="1"
         />
         <input-number
           name="numberOfFullFrames"
           id="numberOfFullFrames"
-          label="Number of full frames"
+          :label="$t('locale.controls.numberOfFullFrames')"
           :min="1"
         />
         <input-number
           name="numberOfFramesWithSealedBrood"
           id="numberOfFramesWithSealedBrood"
-          label="NOF with sealed brood"
+          :label="$t('locale.controls.numberOfFramesWithSealedBrood')"
           :min="1"
         />
-        <input-radio-wrapper label="Unsealed brood">
+        <input-radio-wrapper :label="$t('locale.controls.unsealedBrood.label')">
           <input-radio
             id="unsealedBroodTrue"
             name="unsealedBrood"
-            label="True"
+            :label="$t('locale.controls.unsealedBrood.true')"
             :value="true"
           />
           <input-radio
             id="unsealedBroodFalse"
             name="unsealedBrood"
-            label="False"
+            :label="$t('locale.controls.unsealedBrood.false')"
             :value="false"
           />
         </input-radio-wrapper>
-        <input-radio-wrapper label="Queen spotted">
+        <input-radio-wrapper :label="$t('locale.controls.queenSpotted.label')">
           <input-radio
             id="queenSpottedTrue"
             name="queenSpotted"
-            label="True"
+            :label="$t('locale.controls.queenSpotted.true')"
             :value="true"
           />
           <input-radio
             id="queenSpottedFalse"
             name="queenSpotted"
-            label="False"
+            :label="$t('locale.controls.queenSpotted.false')"
             :value="false"
           />
         </input-radio-wrapper>
-        <input-radio-wrapper label="Fresh eggs">
+        <input-radio-wrapper :label="$t('locale.controls.freshEggs.label')">
           <input-radio
             id="freshEggsTrue"
             name="freshEggs"
-            label="True"
+            :label="$t('locale.controls.freshEggs.true')"
             :value="true"
           />
           <input-radio
             id="freshEggsFalse"
             name="freshEggs"
-            label="False"
+            :label="$t('locale.controls.freshEggs.false')"
             :value="false"
           />
         </input-radio-wrapper>
         <input-select
           :options="[
-            {name: 'Sunny/Clear', value: 'sunny'},
-            {name: 'Partially cloudy', value: 'partiallyCloudy'},
-            {name: 'Overcast', value: 'overcast'},
-            {name: 'Rain', value: 'rain'},
-            {name: 'Drizzle', value: 'drizzle'},
-            {name: 'Snow', value: 'snow'},
-            {name: 'Before storm', value: 'beforeStorm'},
-            {name: 'Stormy', value: 'stormy'},
+            {name: $t('locale.controls.weather.sunny'), value: 'sunny'},
+            {name: $t('locale.controls.weather.partiallyCloudy'), value: 'partiallyCloudy'},
+            {name: $t('locale.controls.weather.overcast'), value: 'overcast'},
+            {name: $t('locale.controls.weather.rain'), value: 'rain'},
+            {name: $t('locale.controls.weather.drizzle'), value: 'drizzle'},
+            {name: $t('locale.controls.weather.snow'), value: 'snow'},
+            {name: $t('locale.controls.weather.beforeStorm'), value: 'beforeStorm'},
+            {name: $t('locale.controls.weather.stormy'), value: 'stormy'},
           ]"
           name="weather"
           id="weather"
-          label="Weather"
+          :label="$t('locale.controls.weather.label')"
         />
         <input-number
           name="temperature"
-          label="Temperature"
+          :label="$t('locale.controls.temperature')"
           id="temperature"
           :min="-100"
           :max="100"
@@ -104,11 +104,11 @@
           id="hostility"
           :min="0"
           :max="10"
-          label="Hostility"
+          :label="$t('locale.controls.hostility')"
         />
-        <controls-todo ref="workDone">Work done</controls-todo>
-        <controls-todo ref="workToDo">Work to do</controls-todo>
-        <base-button>Add control</base-button>
+        <controls-todo ref="workDone">{{$t('locale.controls.workDone')}}</controls-todo>
+        <controls-todo ref="workToDo">{{$t('locale.controls.workToDo')}}</controls-todo>
+        <base-button>{{$t('locale.controls.addControl')}}</base-button>
       </base-form>
     </base-modal>
   </div>

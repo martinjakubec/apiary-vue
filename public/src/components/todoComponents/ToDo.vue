@@ -39,7 +39,7 @@ export default {
             process.env.VUE_APP_API_URL +
             `/hive/${this.$props.hiveNumber}/updatetodo`;
           const body = {
-            todoCustomId: this.$props.id,
+            _id: this.$props.id,
             toDoValue: !this.scopedIsDone,
           };
           const updateToDoRequest = await fetch(apiUrl, {

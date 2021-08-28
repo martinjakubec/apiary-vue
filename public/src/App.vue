@@ -6,7 +6,7 @@
     :isUserLoggedIn="isUserLoggedIn"
     @user-logout="handleUserLogout"
   />
-  <left-navbar :isUserLoggedIn="isUserLoggedIn" v-if="isUserLoggedIn" />
+  <left-navbar :isUserLoggedIn="isUserLoggedIn"/>
   <div class="router-view">
     <router-view
       :isUserLoggedIn="isUserLoggedIn"
@@ -85,7 +85,11 @@ export default {
         }
       );
       const userDataResponse = await userDataRequest.json();
-      this.userData = userDataResponse;
+      if (userDataResponse.status === 'ok') {
+        this.userData = userDataResponse.data;
+      } else {
+        this.openError('Error fetching user data')
+      }
     },
     async handleUserLogin(e) {
       const username = e.target.username.value.trim();

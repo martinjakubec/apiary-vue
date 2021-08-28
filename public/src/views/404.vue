@@ -1,7 +1,7 @@
 <template>
   <div>
-    <h1>404</h1>
-    <p>Wrong page, bzzzz...</p>
+    <h1>{{ $t('locale.pageTitles.404') }}</h1>
+    <p>{{ $t('locale.pages.404.pageNotFound') }}</p>
   </div>
 </template>
 

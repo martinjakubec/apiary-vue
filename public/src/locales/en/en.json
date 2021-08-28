@@ -8,7 +8,8 @@
     "register": "Register",
     "login": "Login",
     "logout": "Logout",
-    "singleHive": "Hive n°{hiveNumber}"
+    "singleHive": "Hive n°{hiveNumber}",
+    "404": "404"
   },
   "input": {
     "password": "Password",
@@ -16,5 +17,120 @@
     "login": "Login",
     "email": "E-mail",
     "register": "Register"
+  },
+  "errors": {
+    "closeError": "Close"
+  },
+  "miscellaneous": {
+    "contactUs": "Contact admin"
+  },
+  "pages": {
+    "Home": {
+      "totalNumberOfHives": "Total number of hives: {numberOfHives}",
+      "lastControlsDataTitle": "Data from last controls",
+      "numHivesWithoutEggs": "Number of hives without eggs: {noEggsHivesNumber}",
+      "numHivesWithoutQueen": "Number of hives without seen queen: { noQueenHivesNumber }",
+      "numHivesWithoutEggsAndQueen": "Number of hives without eggs & seen queen: { noEggsAndQueenHivesNumber }",
+      "seeAllHives": "All hives",
+      "totalNumberOfTodos": "Total number of to-dos: {numberOfTodos}",
+      "hivesWithMostTodos": "Hives with most work to do:",
+      "hiveWithNumber": "Hive n°{hiveNumber}",
+      "allTodos": "All to-dos"
+    },
+    "Hives": {
+      "loadingText": "Loading...",
+      "addHivesPrompt": "You don't seem to have any hives, feel free to add your first one!",
+      "addHive": "Add hive",
+      "hiveWithNumber": "Hive n°{hiveNumber}",
+      "seeMore": "See more"
+    },
+    "SingleHive": {
+      "hiveNumber": "Hive number",
+      "deleteHive": "Delete hive",
+      "deleteHivePrompt": "You are about to delete this hive permanently. Write the hive number to confirm this.",
+      "overalState": "Overal state",
+      "hiveDescription": "Hive description",
+      "totalNumberOfFrames": "Total number of frames",
+      "hiveColor": "Hive color",
+      "queenBreed": "Queen breed",
+      "queenNumber": "Queen number",
+      "queenColor": {
+        "label": "Queen color",
+        "white": "White",
+        "yellow": "Yellow",
+        "red": "Red",
+        "green": "Green",
+        "blue": "Blue",
+        "NA": "Not marked"
+      },
+      "dateAdded": "Date added",
+      "honeySuper": "Number of honey supers",
+      "close": "Close",
+      "saveChanges": "Save changes",
+      "editInfo": "Edit information",
+      "backToAllHives": "Back to all hives",
+      "submit": "Submit"
+    },
+    "Login": {
+      "noAccountPrompt": "No account yet?",
+      "registerPrompt": "Register!"
+    },
+    "Register": {
+      "registrationSuccessful": "Registration successful, you will be redirected to login page."
+    },
+    "404": {
+      "pageNotFound": "Wrong page, bzzzz..."
+    }
+  },
+  "controls": {
+    "controlsTitle": "Controls",
+    "addControl": "Add control",
+    "editDelete": "Edit/Delete",
+    "edit": "Edit",
+    "delete": "Delete",
+    "yes": "Yes",
+    "no": "No",
+    "applyChanges": "Apply changes",
+    "dateOfControl": "Date of control",
+    "numberOfFrames": "Total number of frames",
+    "numberOfFullFrames": "Number of full frames",
+    "numberOfFramesWithSealedBrood": "NOF with sealed brood",
+    "unsealedBrood": {
+      "label": "Unsealed brood",
+      "true": "Yes",
+      "false": "No"
+    },
+    "queenSpotted": {
+      "label": "Queen spotted",
+      "true": "Yes",
+      "false": "No"
+    },
+    "freshEggs": {
+      "label": "Fresh eggs",
+      "true": "Yes",
+      "false": "No"
+    },
+    "weather": {
+      "label": "Weather",
+      "sunny": "Sunny",
+      "partiallyCloudy": "Partially cloudy",
+      "overcast": "Overcast",
+      "rain": "Rain",
+      "drizzle": "Drizzle",
+      "snow": "Snow",
+      "beforeStorm": "Before storm",
+      "stormy": "Stormy"
+    },
+    "temperature": "Temperature",
+    "hostility": "Hostility",
+    "workDone": "Work done",
+    "workToDo": "Work to do",
+    "todos": {
+      "add": "Add",
+      "addItem": "Add item",
+      "removeLast": "Remove last item",
+      "hiveNumberTitle": "Hive n°{hiveNumber}",
+      "dateOfControl": "Control from {dateOfControl}"
+    }
   }
 }

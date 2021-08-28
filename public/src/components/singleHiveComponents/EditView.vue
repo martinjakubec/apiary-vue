@@ -4,68 +4,68 @@
       <input-text
         :id="'overalState'"
         :name="'overalState'"
-        :label="'Overal state'"
+        :label="$t('locale.pages.SingleHive.overalState')"
         :defaultValue="hiveData.overalState"
         :maxLength="100"
       />
       <input-text
         :id="'hiveDescription'"
         :name="'hiveDescription'"
-        :label="'Hive description'"
+        :label="$t('locale.pages.SingleHive.hiveDescription')"
         :defaultValue="hiveData.hiveDescription"
         :maxLength="100"
       />
       <input-number
         :id="'totalNumberOfFrames'"
         :name="'totalNumberOfFrames'"
-        :label="'Total number of frames'"
+        :label="$t('locale.pages.SingleHive.totalNumberOfFrames')"
         :defaultValue="String(hiveData.totalNumberOfFrames)"
       />
       <input-color
         :id="'hiveColor'"
         :name="'hiveColor'"
-        :label="'Hive color'"
+        :label="$t('locale.pages.SingleHive.hiveColor')"
         :defaultValue="hiveData.hiveColor"
         ref="hiveColor"
       />
       <input-text
         :id="'queenBreed'"
         :name="'queenBreed'"
-        :label="'Queen breed'"
+        :label="$t('locale.pages.SingleHive.queenBreed')"
         :defaultValue="hiveData.queenBreed"
         :maxLength="100"
       />
       <input-number
         :id="'queenNumber'"
         :name="'queenNumber'"
-        :label="'Queen number'"
+        :label="$t('locale.pages.SingleHive.queenNumber')"
         :min="1"
         :max="100"
       />
       <input-select
         :id="'queenColor'"
         :name="'queenColor'"
-        :label="'Queen color'"
+        :label="$t('locale.pages.SingleHive.queenColor.label')"
         :options="[
-          {value: 'white', name: 'White'},
-          {value: 'yellow', name: 'Yellow'},
-          {value: 'red', name: 'Red'},
-          {value: 'green', name: 'Green'},
-          {value: 'blue', name: 'Blue'},
-          {value: 'N/A', name: 'Not marked', isDefault: true},
+          {value: 'white', name: $t('locale.pages.SingleHive.queenColor.white')},
+          {value: 'yellow', name: $t('locale.pages.SingleHive.queenColor.yellow')},
+          {value: 'red', name: $t('locale.pages.SingleHive.queenColor.red')},
+          {value: 'green', name: $t('locale.pages.SingleHive.queenColor.green')},
+          {value: 'blue', name: $t('locale.pages.SingleHive.queenColor.blue')},
+          {value: 'N/A', name: $t('locale.pages.SingleHive.queenColor.NA'), isDefault: true},
         ]"
         :defaultValue="hiveData.queenColor"
       />
       <input-date
         :id="'dateAdded'"
         :name="'dateAdded'"
-        :label="'Date added'"
+        :label="$t('locale.pages.SingleHive.dateAdded')"
         :defaultValue="hiveData.dateAdded ? hiveData.dateAdded.slice(0, 10) : ''"
       />
       <input-number
         :id="'honeySuper'"
         :name="'honeySuper'"
-        :label="'Number of honey supers'"
+        :label="$t('locale.pages.SingleHive.honeySuper')"
         :min="0"
         :max="7"
         :defaultValue="String(hiveData.honeySuper)"
@@ -76,10 +76,10 @@
         :buttonType="'ghost'"
         @click="closeEdit"
         class="form-button"
-        >Close</base-button
+        >{{$t('locale.pages.SingleHive.close')}}</base-button
       >
       <base-button type="submit" form="form1" class="form-button"
-        >Save changes</base-button
+        >{{$t('locale.pages.SingleHive.saveChanges')}}</base-button
       >
     </div>
   </div>

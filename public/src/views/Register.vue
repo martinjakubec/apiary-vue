@@ -3,7 +3,7 @@
     <h1>{{ $t('locale.pageTitles.register') }}</h1>
     <form class="inputs" @submit.prevent="handleRegistration">
       <p v-if="registrationSuccessful">
-        Registration successful, you will be redirected to login page.
+        {{$t('locale.pages.Register.registrationSuccessful')}}
       </p>
       <input-text
         :isRequired="true"

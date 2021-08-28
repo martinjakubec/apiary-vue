@@ -4,19 +4,19 @@
       <table>
         <thead>
           <tr>
-            <td class="first-col">Date of control</td>
-            <td>Number of frames</td>
-            <td>Number of full frames</td>
-            <td>NOF with sealed brood</td>
-            <td>Unsealed brood</td>
-            <td>Queen spotted</td>
-            <td>Fresh eggs</td>
-            <td>Weather</td>
-            <td>Temperature</td>
-            <td>Hostility</td>
-            <td>Work done</td>
-            <td>Work to do</td>
-            <td colspan="2">Edit/Delete</td>
+            <td class="first-col">{{$t('locale.controls.dateOfControl')}}</td>
+            <td>{{$t('locale.controls.numberOfFrames')}}</td>
+            <td>{{$t('locale.controls.numberOfFullFrames')}}</td>
+            <td>{{$t('locale.controls.numberOfFramesWithSealedBrood')}}</td>
+            <td>{{$t('locale.controls.unsealedBrood.label')}}</td>
+            <td>{{$t('locale.controls.queenSpotted.label')}}</td>
+            <td>{{$t('locale.controls.freshEggs.label')}}</td>
+            <td>{{$t('locale.controls.weather.label')}}</td>
+            <td>{{$t('locale.controls.temperature')}}</td>
+            <td>{{$t('locale.controls.hostility')}}</td>
+            <td>{{$t('locale.controls.workDone')}}</td>
+            <td>{{$t('locale.controls.workToDo')}}</td>
+            <td colspan="2">{{$t('locale.controls.editDelete')}}</td>
           </tr>
         </thead>
         <tbody>

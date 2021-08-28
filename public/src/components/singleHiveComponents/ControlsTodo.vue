@@ -5,14 +5,14 @@
       <input
         type="text"
         @keydown.enter.prevent="addItem"
-        placeholder="Add item"
+        :placeholder="$t('locale.controls.todos.addItem')"
         ref="addItemValue"
       />
-      <span @click="addItemButton">Add</span>
+      <span @click="addItemButton">{{$t('locale.controls.todos.add')}}</span>
       <div class="work-done-wrapper">
         <p v-for="item of workDone" :key="item">- {{ item }}</p>
         <p class="remove-last bold" @click.prevent="removeLast">
-          Remove last item
+          {{$t('locale.controls.todos.removeLast')}}
         </p>
       </div>
     </div>

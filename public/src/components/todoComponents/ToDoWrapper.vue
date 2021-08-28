@@ -1,6 +1,8 @@
 <template>
   <div class="todo-wrapper">
-    <h3>Control from {{ localizedDate }}</h3>
+    <h3>
+      {{ $t('locale.controls.todos.dateOfControl', {dateOfControl: localizedDate}) }}
+    </h3>
     <slot></slot>
   </div>
 </template>
@@ -24,7 +26,6 @@ h3 {
   font-size: 1.8rem;
   font-weight: bold;
   margin-bottom: 1rem;
-
 }
 .todo-wrapper {
   margin-bottom: 3.5rem;

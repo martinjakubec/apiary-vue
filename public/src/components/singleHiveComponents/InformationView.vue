@@ -1,44 +1,48 @@
 <template>
   <div>
     <p v-if="hiveData.overalState">
-      <span class="description-label">Overal state: </span
+      <span class="description-label"
+        >{{ $t('locale.pages.SingleHive.overalState') }}: </span
       >{{ hiveData.overalState }}
     </p>
     <p v-if="hiveData.totalNumberOfFrames">
-      <span class="description-label">Total number of frames: </span
+      <span class="description-label"
+        >{{ $t('locale.pages.SingleHive.totalNumberOfFrames') }}: </span
       >{{ hiveData.totalNumberOfFrames }}
     </p>
     <p v-if="hiveData.hiveColor" :style="{color: hiveData.hiveColor}">
-      <span class="description-label">Hive color: </span
+      <span class="description-label"
+        >{{ $t('locale.pages.SingleHive.hiveColor') }}: </span
       >{{ hiveData.hiveColor }}
     </p>
     <p v-if="hiveData.queenBreed">
-      <span class="description-label">Queen breed: </span
+      <span class="description-label"
+        >{{ $t('locale.pages.SingleHive.queenBreed') }}: </span
       >{{ hiveData.queenBreed }}
     </p>
     <p v-if="hiveData.queenNumber">
-      <span class="description-label">Queen number: </span
+      <span class="description-label"
+        >{{ $t('locale.pages.SingleHive.queenNumber') }}: </span
       >{{ hiveData.queenNumber }}
     </p>
     <p v-if="hiveData.queenColor">
-      <span class="description-label">Queen color: </span
+      <span class="description-label"
+        >{{ $t('locale.pages.SingleHive.queenColor.label') }}: </span
       >{{ hiveData.queenColor }}
     </p>
     <p v-if="hiveData.dateAdded">
-      <span class="description-label">Date added: </span
+      <span class="description-label"
+        >{{ $t('locale.pages.SingleHive.dateAdded') }}: </span
       >{{ new Date(Date.parse(hiveData.dateAdded)).toLocaleDateString() }}
     </p>
     <p v-if="hiveData.honeySuper">
-      <span class="description-label">Number of honey supers: </span
+      <span class="description-label"
+        >{{ $t('locale.pages.SingleHive.honeySuper') }}: </span
       >{{ hiveData.honeySuper }}
     </p>
-    <p v-if="hiveData.honeyAmount">
-      <span class="description-label">Honey amount: </span
-      >{{ hiveData.honeyAmount }}
-    </p>
-    <base-button :buttonType="'ghost'" @click="$emit('open-edit')"
-      >Edit info</base-button
-    >
+    <base-button :buttonType="'ghost'" @click="$emit('open-edit')">{{
+      $t('locale.pages.SingleHive.editInfo')
+    }}</base-button>
   </div>
 </template>
 

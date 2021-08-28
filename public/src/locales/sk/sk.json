@@ -17,5 +17,120 @@
     "login": "Prihlásiť sa",
     "email": "E-mailová adresa",
     "register": "Registrovať sa"
+  },
+  "errors": {
+    "closeError": "Zatvoriť"
+  },
+  "miscellaneous": {
+    "contactUs": "Napísať adminovi"
+  },
+  "pages": {
+    "Home": {
+      "totalNumberOfHives": "Celkový počet úľov: {numberOfHives}",
+      "lastControlsDataTitle": "Dáta z posledných kontrol",
+      "numHivesWithoutEggs": "Počet úľov bez otvoreného plodu: {noEggsHivesNumber}",
+      "numHivesWithoutQueen": "Počet úľov bez videnej matky: { noQueenHivesNumber }",
+      "numHivesWithoutEggsAndQueen": "Počet úľov bez otvoreného plodu a videnej matky: { noEggsAndQueenHivesNumber }",
+      "seeAllHives": "Všetky úle",
+      "totalNumberOfTodos": "Celkový počet úloh: {numberOfTodos}",
+      "hivesWithMostTodos": "Úle s najviac úlohami:",
+      "hiveWithNumber": "Úľ č.{hiveNumber}",
+      "allTodos": "Všetky úlohy"
+    },
+    "Hives": {
+      "loadingText": "Načítava sa...",
+      "addHivesPrompt": "Vzyerá, že nemáš žiadne úle, pridaj nejaké!",
+      "addHive": "Pridať úľ",
+      "hiveWithNumber": "Úľ č.{hiveNumber}",
+      "seeMore": "Viac"
+    },
+    "SingleHive": {
+      "hiveNumber": "Číslo úľa",
+      "deleteHive": "Vymazať úľ",
+      "deleteHivePrompt": "Touto akciou sa úľ navždy vymaže. Pre potvrdenie napíš číslo tohoto úľa.",
+      "overalState": "Celkový stav",
+      "hiveDescription": "Popis úľa",
+      "totalNumberOfFrames": "Celkový počet rámikov",
+      "hiveColor": "Farba úľa",
+      "queenBreed": "Plemeno matky",
+      "queenNumber": "Číslo matky",
+      "queenColor": {
+        "label": "Farba matky",
+        "white": "Biela",
+        "yellow": "Žltá",
+        "red": "Červená",
+        "green": "Zelená",
+        "blue": "Modrá",
+        "NA": "Neoznačená"
+      },
+      "dateAdded": "Dátum pridania",
+      "honeySuper": "Počet medníkov",
+      "close": "Zatvoriť",
+      "saveChanges": "Uložiť zmeny",
+      "editInfo": "Upraviť informácie",
+      "backToAllHives": "Späť na všetky úle",
+      "submit": "Pridať úľ"
+    },
+    "Login": {
+      "noAccountPrompt": "Ešte nemáš účet?",
+      "registerPrompt": "Zaregistruj sa!"
+    },
+    "Register": {
+      "registrationSuccessful": "Registrácia úspešná, presmerujeme ťa na prihlasovaciu stránku."
+    },
+    "404": {
+      "pageNotFound": "Stránka neexistuje, bzzz..."
+    }
+  },
+  "controls": {
+    "controlsTitle": "Prehliadky",
+    "addControl": "Pridať prehliadku",
+    "editDelete": "Upraviť/Vymazať",
+    "edit": "Upraviť",
+    "delete": "Vymazať",
+    "yes": "Áno",
+    "no": "Nie",
+    "applyChanges": "Použiť zmeny",
+    "dateOfControl": "Dátum prehliadky",
+    "numberOfFrames": "Celkový počet rámikov",
+    "numberOfFullFrames": "Počet obsadených rámikov",
+    "numberOfFramesWithSealedBrood": "Počet zaplodovaných rámikov",
+    "unsealedBrood": {
+      "label": "Otvorený plod",
+      "true": "Áno",
+      "false": "Nie"
+    },
+    "queenSpotted": {
+      "label": "Matka videná",
+      "true": "Áno",
+      "false": "Nie"
+    },
+    "freshEggs": {
+      "label": "Čerstvé vajíčka",
+      "true": "Áno",
+      "false": "Nie"
+    },
+    "weather": {
+      "label": "Počasie",
+      "sunny": "Slnečne",
+      "partiallyCloudy": "Polojasno",
+      "overcast": "Oblačno",
+      "rain": "Dážď",
+      "drizzle": "Mrholenie",
+      "snow": "Sneh",
+      "beforeStorm": "Pred búrkou",
+      "stormy": "Búrka"
+    },
+    "temperature": "Teplota",
+    "hostility": "Útočnosť",
+    "workDone": "Vykonaná práca",
+    "workToDo": "Úlohy na budúce",
+    "todos": {
+      "add": "Pridať",
+      "addItem": "Pridať položku",
+      "removeLast": "Odstrániť poslednú položku",
+      "hiveNumberTitle": "Úľ č.{hiveNumber}",
+      "dateOfControl": "Prehliadka z {dateOfControl}"
+    }
   }
 }

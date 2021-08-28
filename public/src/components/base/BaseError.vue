@@ -2,7 +2,7 @@
   <div class="error-modal">
     <p>{{$t('errorMessages.errorTitle')}}</p>
     <slot></slot>
-    <base-button @button-clicked="$emit('close-error')">Close</base-button>
+    <base-button @button-clicked="$emit('close-error')">{{$t('locale.errors.closeError')}}</base-button>
   </div>
 </template>
 

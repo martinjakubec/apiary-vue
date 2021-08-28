@@ -14,8 +14,8 @@ router.get('/hives', async (req, res, next) => {
           'hives.hiveNumber': 1,
           'hives.hiveColor': 1,
           'hives.honeySuper': 1,
-          'hives.honeyAmount': 1,
           'hives.hiveDescription': 1,
+          'hives.controls': 1
         }
       ).select({_id: 0});
       res.send({status: 'ok', data: hivesToGet});
